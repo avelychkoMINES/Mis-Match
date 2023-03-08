@@ -38,11 +38,12 @@ fun CameraView() {
         }
         Row(modifier = Modifier.fillMaxSize(),
         ) {
-            IconButton(onClick = {  }) {
+            IconButton(onClick = {
+                Toast.makeText(context, "Takes a picture", Toast.LENGTH_SHORT).show()
+            }) {
                 Icon(painter = painterResource(id = R.drawable.baseline_circle_24), contentDescription = "")
             }
         }
-        
     }
 }
 

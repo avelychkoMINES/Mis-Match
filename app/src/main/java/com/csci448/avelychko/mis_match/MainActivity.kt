@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
@@ -30,14 +30,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Greeting() {
+    SavedOutfitsView()
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MisMatchTheme {
-        Greeting("Android")
+        Greeting()
     }
 }
