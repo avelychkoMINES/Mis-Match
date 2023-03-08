@@ -37,6 +37,7 @@ fun CameraView() {
             Text(text = "Shoes", color = Color.White);
         }
         Row(modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.Center
         ) {
             IconButton(onClick = {
                 Toast.makeText(context, "Takes a picture", Toast.LENGTH_SHORT).show()
