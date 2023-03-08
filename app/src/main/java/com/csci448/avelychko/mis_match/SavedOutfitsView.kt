@@ -1,5 +1,6 @@
 package com.csci448.avelychko.mis_match
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
@@ -7,15 +8,18 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.flow.internal.NoOpContinuation.context
 
 @Composable
 fun SavedOutfitsView() {
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween) {
+        val currentContext = LocalContext.current
         //LOGO
 //        Row() {
 //
@@ -34,7 +38,11 @@ fun SavedOutfitsView() {
         }
         //HEART
         IconButton(modifier = Modifier.padding(5.dp),
-            onClick = { /*TODO*/ }) {
+            onClick = { Toast
+                .makeText(currentContext,
+                    "Added to Favorites",
+                    Toast.LENGTH_SHORT)
+                .show() }) {
             Icon(painter = painterResource(id = R.drawable.baseline_favorite_24), contentDescription = "")
         }
     }
