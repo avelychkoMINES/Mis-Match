@@ -25,7 +25,7 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 @Composable
 fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                 onSavedOutfitsClick: () -> Unit, onStyleGeneratorClick: () -> Unit,
-                onClosetClick: () -> Unit) {
+                onClosetClick: () -> Unit, onCameraClick: () -> Unit) {
 
     Column(modifier = Modifier
         .padding(10.dp)) {
@@ -107,7 +107,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
 
 
                 }
-            IconButton(onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.BottomEnd)) {
+            IconButton(onClick = { onCameraClick() }, modifier = Modifier.align(Alignment.BottomEnd)) {
                 Icon(painter = painterResource(id = R.drawable.baseline_camera_alt_24), contentDescription = "")
             }
 

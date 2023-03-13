@@ -22,7 +22,7 @@ fun CameraView() {
         .background(Color.Black)
     )
     {
-        Spacer(modifier = Modifier.height(700.dp))
+        Spacer(modifier = Modifier.height(600.dp))
 
         Row(modifier = Modifier
             .fillMaxWidth()

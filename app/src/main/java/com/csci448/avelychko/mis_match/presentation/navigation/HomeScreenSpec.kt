@@ -24,6 +24,9 @@ object HomeScreenSpec : IScreenSpec {
         }, onClosetClick =
         {
             navController.navigate("closet")
+        },
+        {
+            navController.navigate("camera")
         })
     }
 }
