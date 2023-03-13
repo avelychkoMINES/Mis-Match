@@ -12,6 +12,6 @@ object SavedOutfitsSpec: IScreenSpec {
 
     @Composable
     override fun Content(viewModel: MisMatchViewModel, navController: NavController) {
-        SavedOutfitsView()
+        SavedOutfitsView() { navController.navigate("home") }
     }
 }

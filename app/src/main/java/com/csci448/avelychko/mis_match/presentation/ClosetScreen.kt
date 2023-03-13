@@ -61,5 +61,5 @@ fun ClosetView(onLogoClicked: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun ClosetPreview() {
-    ClosetView()
+    ClosetView() {}
 }

@@ -63,5 +63,5 @@ fun SavedOutfitsView(onLogoClicked: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun SavedOutfitsPreview() {
-    SavedOutfitsView()
+    SavedOutfitsView() {}
 }

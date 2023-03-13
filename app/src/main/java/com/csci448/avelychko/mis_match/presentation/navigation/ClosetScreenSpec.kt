@@ -12,6 +12,6 @@ object ClosetScreenSpec: IScreenSpec {
 
     @Composable
     override fun Content(viewModel: MisMatchViewModel, navController: NavController) {
-        ClosetView()
+        ClosetView() { navController.navigate("home") }
     }
 }

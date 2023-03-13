@@ -31,7 +31,6 @@ fun OutfitBuilderView(onLogoClicked: () -> Unit) {
             fontSize = 36.sp,
             fontFamily = FontFamily.Serif) },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(Color(red = 199, green = 173, blue = 127)),
-            modifier = Modifier.clickable { onLogoClicked() }
         )
         Divider(thickness = 2.dp, color = Color.Black)
 
@@ -78,5 +77,5 @@ fun OutfitBuilderView(onLogoClicked: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun OutfitBuilderPreview() {
-    OutfitBuilderView()
+    OutfitBuilderView() {}
 }
