@@ -21,6 +21,7 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StyleScreen (viewModel: MisMatchViewModel) : Unit {
+    val currentContext = LocalContext.current
 
     Column(modifier = Modifier
         .padding(10.dp)) {
@@ -60,6 +61,11 @@ fun StyleScreen (viewModel: MisMatchViewModel) : Unit {
                             onClick = { selectedStyle.value = selection
                                 isExpanded.value = false
                                 //onStyleClicked(selection)
+                                Toast
+                                    .makeText(currentContext,
+                                        "Change Style",
+                                        Toast.LENGTH_SHORT)
+                                    .show()
                             },
 
                             )
