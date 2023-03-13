@@ -47,7 +47,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
         ) {
             Column() {
                 ElevatedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onOutfitBuilderClick() },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -62,7 +62,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                         fontWeight = FontWeight.Light)
                 }
                 ElevatedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onSavedOutfitsClick() },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -77,7 +77,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
 
                 }
                 ElevatedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onStyleGeneratorClick() },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -91,7 +91,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                         color = Color.Blue)
                 }
                 ElevatedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onClosetClick() },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
