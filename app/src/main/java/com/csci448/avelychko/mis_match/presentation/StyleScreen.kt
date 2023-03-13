@@ -73,7 +73,6 @@ fun StyleScreen (viewModel: MisMatchViewModel) : Unit {
                     }
                 }
             }
-
         }
     }
 }

@@ -8,11 +8,11 @@ sealed interface IScreenSpec {
     companion object {
         val allScreens = IScreenSpec::class.sealedSubclasses.map { it.objectInstance }
         val root = "mismatch"
-      //  val startDestination = HomeScreenSpec.route
+        val startDestination = HomeScreenSpec.route
     }
 
     val route: String
 
-    //@Composable
-    //fun Content(viewModel: MisMatchViewModel, navController: NavController)
+    @Composable
+    fun Content(viewModel: MisMatchViewModel, navController: NavController)
 }
