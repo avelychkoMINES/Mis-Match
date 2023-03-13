@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    HomeScreen()
+    //HomeScreen()
 }
 
 @Preview(showBackground = true)

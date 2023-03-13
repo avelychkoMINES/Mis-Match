@@ -19,10 +19,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.csci448.avelychko.mis_match.R
+import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen () : Unit {
+fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
+                onSavedOutfitsClick: () -> Unit, onStyleGeneratorClick: () -> Unit,
+                onClosetClick: () -> Unit) {
 
     Column(modifier = Modifier
         .padding(10.dp)) {
@@ -113,5 +116,5 @@ fun HomeScreen () : Unit {
 @Preview
 @Composable
 fun previewHomePage () : Unit {
-    HomeScreen()
+    //HomeScreen()
 }
