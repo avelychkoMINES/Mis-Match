@@ -1,12 +1,11 @@
 package com.csci448.avelychko.mis_match
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -33,28 +32,53 @@ fun ClosetView(onLogoClicked: () -> Unit) {
         )
         Divider(thickness = 2.dp, color = Color.Black)
 
-        Text(text = "Tops")
-        Row(modifier = Modifier
-            .padding(10.dp)) {
-            //items(clothes) { Image(painter = it)}
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .weight(0.8f)
+                .background(color = Color(red = 225, green = 208, blue = 191)),
+        ) {
+            Column(modifier = Modifier.padding(20.dp)) {
+                Column(Modifier.padding(vertical = 40.dp)) {
+                    Text(text = "Tops",
+                        fontSize = 24.sp)
+                    Row(modifier = Modifier
+                        .padding(10.dp),
+                    ) {
+                        //items(clothes) { Image(painter = it)}
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                    }
+                }
+                Column(Modifier.padding(vertical = 40.dp)) {
+                    Text(text = "Bottoms",
+                        fontSize = 24.sp)
+                    Row(modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()) {
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                    }
+                }
+
+                Column(Modifier.padding(vertical = 40.dp)) {
+                    Text(text = "Shoes",
+                        fontSize = 24.sp)
+                    Row(modifier = Modifier
+                        .padding(10.dp)) {
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
+                    }
+                }
+
+            }
+
         }
-        Text(text = "Bottoms")
-        Row(modifier = Modifier
-            .padding(10.dp)) {
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-        }
-        Text(text = "Shoes")
-        Row(modifier = Modifier
-            .padding(10.dp)) {
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-            Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-        }
+
+
     }
 }
 
