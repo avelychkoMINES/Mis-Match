@@ -28,7 +28,8 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                 onClosetClick: () -> Unit) {
 
     Column(modifier = Modifier
-        .padding(10.dp)) {
+        .padding(10.dp)
+        .fillMaxWidth()) {
         CenterAlignedTopAppBar(title = {Text("Mis-Match!",
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.ExtraBold,
@@ -43,7 +44,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .weight(0.8f)
-                .background(color = Color(red = 245, green = 245, blue = 221, alpha = 180)),
+                .background(color = Color(red = 230, green = 208 , blue = 159, alpha = 130)),
         ) {
             Column() {
                 ElevatedButton(
@@ -52,7 +53,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                     modifier = Modifier
                         .fillMaxWidth()
                         //.padding(20.dp)
-                        .padding(horizontal = 20.dp, vertical = 60.dp)
+                        .padding(horizontal = 20.dp, vertical = 30.dp)
 
                 ) {
                     Text("Outfit Builder",
@@ -66,7 +67,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 60.dp)
+                        .padding(horizontal = 20.dp, vertical = 30.dp)
 
                 ) {
                     Text("Saved Outfits",
@@ -81,21 +82,21 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 60.dp)
+                        .padding(horizontal = 20.dp, vertical = 30.dp)
                 ) {
                     Text("Style Generator",
                         fontSize = 24.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.Serif,
-                        fontWeight = FontWeight.Light,
-                        color = Color.Blue)
+                        fontWeight = FontWeight.Light
+                    )
                 }
                 ElevatedButton(
                     onClick = { /*TODO*/ },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 60.dp)
+                        .padding(horizontal = 20.dp, vertical = 30.dp)
                 ) {
                     Text("View Your Closet",
                         fontSize = 24.sp,
@@ -103,12 +104,14 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                         fontFamily = FontFamily.Serif,
                         fontWeight = FontWeight.Light)
                 }
-                Row(modifier = Modifier.align(Alignment.End)) {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_camera_alt_24), contentDescription = "")
-                    }
+
+
+
                 }
+            IconButton(onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.BottomEnd)) {
+                Icon(painter = painterResource(id = R.drawable.baseline_camera_alt_24), contentDescription = "")
             }
+
         }
     }
 }
