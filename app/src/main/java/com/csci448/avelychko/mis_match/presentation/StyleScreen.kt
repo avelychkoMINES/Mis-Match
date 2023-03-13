@@ -16,7 +16,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.csci448.mis_match_start.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,6 +37,7 @@ fun StyleScreen (viewModel: MisMatchViewModel) : Unit {
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .weight(0.8f)
+                .fillMaxWidth()
                 .background(color = Color(red = 245, green = 245, blue = 221, alpha = 180)),
         ) {
             Row() {
