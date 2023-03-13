@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
+import com.csci448.mis_match_start.presentation.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    SavedOutfitsView()
+    HomeScreen()
 }
 
 @Preview(showBackground = true)
