@@ -27,8 +27,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                 onSavedOutfitsClick: () -> Unit, onStyleGeneratorClick: () -> Unit,
                 onClosetClick: () -> Unit, onCameraClick: () -> Unit) {
 
-    Column(modifier = Modifier
-        .padding(10.dp)) {
+    Column() {
         CenterAlignedTopAppBar(title = {Text("Mis-Match!",
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.ExtraBold,
@@ -43,7 +42,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .weight(0.8f)
-                .background(color = Color(red = 230, green = 208 , blue = 159, alpha = 130)),
+                .background(color = Color(red = 225, green = 208, blue = 191)),
         ) {
             Column() {
                 ElevatedButton(
