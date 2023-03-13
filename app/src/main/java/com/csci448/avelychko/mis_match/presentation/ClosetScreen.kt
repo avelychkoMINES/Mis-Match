@@ -1,5 +1,6 @@
 package com.csci448.avelychko.mis_match
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +19,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ClosetView() {
+fun ClosetView(onLogoClicked: () -> Unit) {
     //clothes: List<Clothes>
     Column(modifier = Modifier.fillMaxSize()) {
         CenterAlignedTopAppBar(title = {
@@ -28,6 +29,7 @@ fun ClosetView() {
                 fontSize = 36.sp,
                 fontFamily = FontFamily.Serif) },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(Color(red = 199, green = 173, blue = 127)),
+            modifier = Modifier.clickable { onLogoClicked() }
         )
         Divider(thickness = 2.dp, color = Color.Black)
 

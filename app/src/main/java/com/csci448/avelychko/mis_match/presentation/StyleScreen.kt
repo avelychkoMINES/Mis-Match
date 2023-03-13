@@ -1,5 +1,6 @@
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material3.*
@@ -22,8 +23,8 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StyleScreen (viewModel: MisMatchViewModel, onStyleClicked: (String) -> Unit) : Unit {
-    val context = LocalContext.current
+fun StyleScreen (viewModel: MisMatchViewModel, onStyleClicked: (String) -> Unit, onLogoClicked: () -> Unit) : Unit {
+    val currentContext = LocalContext.current
 
     Column(modifier = Modifier
         .padding(10.dp)) {
@@ -33,6 +34,7 @@ fun StyleScreen (viewModel: MisMatchViewModel, onStyleClicked: (String) -> Unit)
             fontSize = 36.sp,
             fontFamily = FontFamily.Serif) },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(Color(red = 199, green = 173, blue = 127)),
+            modifier = Modifier.clickable { onLogoClicked() }
         )
         Divider(thickness = 2.dp, color = Color.Black)
 

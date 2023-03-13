@@ -1,6 +1,7 @@
 package com.csci448.avelychko.mis_match
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -17,7 +18,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SavedOutfitsView() {
+fun SavedOutfitsView(onLogoClicked: () -> Unit) {
     val context = LocalContext.current
 
     Column(modifier = Modifier.fillMaxSize(),
@@ -29,6 +30,7 @@ fun SavedOutfitsView() {
                 fontSize = 36.sp,
                 fontFamily = FontFamily.Serif) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(Color(red = 199, green = 173, blue = 127)),
+                modifier = Modifier.clickable { onLogoClicked() },
             )
             Divider(thickness = 2.dp, color = Color.Black)
         }

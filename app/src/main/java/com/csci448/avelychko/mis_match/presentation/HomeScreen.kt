@@ -33,7 +33,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.ExtraBold,
             fontSize = 36.sp,
-            fontFamily = FontFamily.Serif) },
+            fontFamily = FontFamily.Serif)},
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(Color(red = 199, green = 173, blue = 127)),
             )
         Divider(thickness = 2.dp, color = Color.Black)
