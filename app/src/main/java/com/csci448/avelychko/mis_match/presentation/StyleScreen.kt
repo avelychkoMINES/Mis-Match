@@ -22,7 +22,7 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StyleScreen (viewModel: MisMatchViewModel) : Unit {
+fun StyleScreen (viewModel: MisMatchViewModel, onStyleClicked: (String) -> Unit) : Unit {
     val context = LocalContext.current
 
     Column(modifier = Modifier
@@ -69,7 +69,7 @@ fun StyleScreen (viewModel: MisMatchViewModel) : Unit {
                             onClick = {
 //                                selectedStyle.value = selection
 //                                isExpanded.value = false
-                                //onStyleClicked(selection)
+                                onStyleClicked(selection)
                             },
 
                             )
