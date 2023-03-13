@@ -95,7 +95,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 60.dp)
+                        .padding(horizontal = 20.dp, vertical = 30.dp)
                 ) {
                     Text("View Your Closet",
                         fontSize = 24.sp,
