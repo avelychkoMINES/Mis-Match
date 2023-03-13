@@ -28,8 +28,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                 onClosetClick: () -> Unit) {
 
     Column(modifier = Modifier
-        .padding(10.dp)
-        .fillMaxWidth()) {
+        .padding(10.dp)) {
         CenterAlignedTopAppBar(title = {Text("Mis-Match!",
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.ExtraBold,
@@ -48,7 +47,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
         ) {
             Column() {
                 ElevatedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onOutfitBuilderClick() },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -63,7 +62,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                         fontWeight = FontWeight.Light)
                 }
                 ElevatedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onSavedOutfitsClick() },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -78,7 +77,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
 
                 }
                 ElevatedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onStyleGeneratorClick() },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -92,11 +91,11 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                     )
                 }
                 ElevatedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onClosetClick() },
                     shape = CutCornerShape(10),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 30.dp)
+                        .padding(horizontal = 20.dp, vertical = 60.dp)
                 ) {
                     Text("View Your Closet",
                         fontSize = 24.sp,
