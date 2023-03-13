@@ -12,6 +12,12 @@ object StyleGeneratorSpec: IScreenSpec {
 
     @Composable
     override fun Content(viewModel: MisMatchViewModel, navController: NavController) {
-        StyleScreen(viewModel = viewModel)
+        StyleScreen(viewModel = viewModel, onStyleClicked = {
+            Toast
+            .makeText(LocalContext.current,
+                "Change Style",
+                Toast.LENGTH_SHORT)
+            .show()
+        })
     }
 }
