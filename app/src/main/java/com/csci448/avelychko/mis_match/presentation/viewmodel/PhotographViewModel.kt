@@ -3,7 +3,7 @@ package edu.mines.csci448.examples.camera.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import edu.mines.csci448.examples.camera.data.Photograph
+import com.csci448.avelychko.mis_match.data.Photograph
 import edu.mines.csci448.examples.camera.data.PhotographRepository
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*

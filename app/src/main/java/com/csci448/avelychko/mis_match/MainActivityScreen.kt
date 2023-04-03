@@ -12,7 +12,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import edu.mines.csci448.examples.camera.presentation.detail.PhotographDetail
 import edu.mines.csci448.examples.camera.presentation.list.PhotographList
 import edu.mines.csci448.examples.camera.presentation.viewmodel.PhotographViewModel
-import edu.mines.csci448.examples.camera.R
 
 @Composable
 fun MainActivityScreen(photographViewModel: PhotographViewModel,
@@ -32,7 +31,7 @@ fun MainActivityScreen(photographViewModel: PhotographViewModel,
                 onClick = { takePicture() }
             ) {
                 Text(
-                    text = stringResource(id = R.string.button_label_launch_intent)
+                    text = ""
                 )
             }
         }
