@@ -1,4 +1,4 @@
-package edu.mines.csci448.examples.camera.data.database
+package com.csci448.avelychko.mis_match.data.database
 
 import androidx.room.TypeConverter
 import java.util.*

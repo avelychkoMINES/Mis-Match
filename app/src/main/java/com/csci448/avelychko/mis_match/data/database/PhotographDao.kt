@@ -1,7 +1,7 @@
-package edu.mines.csci448.examples.camera.data.database
+package com.csci448.avelychko.mis_match.data.database
 
 import androidx.room.*
-import edu.mines.csci448.examples.camera.data.Photograph
+import com.csci448.avelychko.mis_match.data.Photograph
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 

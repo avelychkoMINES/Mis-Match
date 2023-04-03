@@ -29,13 +29,14 @@ class MainActivity : ComponentActivity() {
             ActivityResultContracts.TakePicture()
         ) { didTakePhoto ->
             if(didTakePhoto) {
-                val photograph = Photograph(photoName)
+                val photograph = Photograph("testImage.jpg")
                 viewModel.addPhotograph(photograph)
             }
         }
 
         takePicture = {
-            photoName = "IMG_${Date()}.JPG"
+            val photoName = "testImage.jpg"
+                //"IMG_${Date()}.JPG"
             val photoFile = File(this@MainActivity, photoName)
             val photoUri = FileProvider.getUriForFile(this@MainActivity,
                 "edu.mines.csci448.examples.camera.fileprovider",

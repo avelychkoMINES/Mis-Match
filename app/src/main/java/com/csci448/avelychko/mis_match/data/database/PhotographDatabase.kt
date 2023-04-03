@@ -1,4 +1,4 @@
-package edu.mines.csci448.examples.camera.data.database
+package com.csci448.avelychko.mis_match.data.database
 
 import android.content.Context
 import android.util.Log
@@ -26,7 +26,8 @@ abstract class PhotographDatabase : RoomDatabase() {
                     instance = Room
                         .databaseBuilder(context,
                                          PhotographDatabase::class.java,
-                                         DATABASE_NAME)
+                                         DATABASE_NAME
+                        )
                         .build()
                     INSTANCE = instance
                 }

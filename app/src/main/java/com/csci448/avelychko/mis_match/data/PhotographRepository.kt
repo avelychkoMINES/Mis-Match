@@ -1,10 +1,9 @@
-package edu.mines.csci448.examples.camera.data
+package com.csci448.avelychko.mis_match.data
 
 import android.content.Context
 import android.util.Log
-import com.csci448.avelychko.mis_match.data.Photograph
-import edu.mines.csci448.examples.camera.data.database.PhotographDao
-import edu.mines.csci448.examples.camera.data.database.PhotographDatabase
+import com.csci448.avelychko.mis_match.data.database.PhotographDao
+import com.csci448.avelychko.mis_match.data.database.PhotographDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope

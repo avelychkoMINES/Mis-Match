@@ -1,10 +1,10 @@
-package edu.mines.csci448.examples.camera.presentation.viewmodel
+package com.csci448.avelychko.mis_match.presentation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csci448.avelychko.mis_match.data.Photograph
-import edu.mines.csci448.examples.camera.data.PhotographRepository
+import com.csci448.avelychko.mis_match.data.PhotographRepository
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

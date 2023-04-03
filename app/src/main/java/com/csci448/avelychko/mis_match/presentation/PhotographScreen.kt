@@ -1,4 +1,4 @@
-package edu.mines.csci448.examples.camera.presentation
+package com.csci448.avelychko.mis_match.presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -6,16 +6,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import edu.mines.csci448.examples.camera.presentation.detail.PhotographDetail
-import edu.mines.csci448.examples.camera.presentation.list.PhotographList
-import edu.mines.csci448.examples.camera.presentation.viewmodel.PhotographViewModel
+import com.csci448.avelychko.mis_match.presentation.detail.PhotographDetail
+import com.csci448.avelychko.mis_match.presentation.list.PhotographList
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 
 @Composable
-fun MainActivityScreen(photographViewModel: PhotographViewModel,
-                       takePicture: () -> Unit) {
+fun PhotographScreen(photographViewModel: PhotographViewModel,
+                     takePicture: () -> Unit) {
     val photographListState = photographViewModel.photographListStateFlow.collectAsStateWithLifecycle()
     val selectedPhotographState = photographViewModel.currentPhotographStateFlow.collectAsStateWithLifecycle()
 
