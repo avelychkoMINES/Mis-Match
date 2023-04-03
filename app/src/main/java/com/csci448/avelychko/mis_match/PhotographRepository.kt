@@ -2,6 +2,7 @@ package edu.mines.csci448.examples.camera.data
 
 import android.content.Context
 import android.util.Log
+import com.csci448.avelychko.mis_match.data.Photograph
 import edu.mines.csci448.examples.camera.data.database.PhotographDao
 import edu.mines.csci448.examples.camera.data.database.PhotographDatabase
 import kotlinx.coroutines.CoroutineScope
