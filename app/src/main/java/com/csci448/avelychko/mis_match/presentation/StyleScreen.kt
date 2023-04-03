@@ -26,8 +26,7 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 fun StyleScreen (viewModel: MisMatchViewModel, onStyleClicked: (String) -> Unit, onLogoClicked: () -> Unit) : Unit {
     val currentContext = LocalContext.current
 
-    Column(modifier = Modifier
-        .padding(10.dp)) {
+    Column() {
         CenterAlignedTopAppBar(title = {Text("Mis-Match!",
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.ExtraBold,
@@ -44,7 +43,7 @@ fun StyleScreen (viewModel: MisMatchViewModel, onStyleClicked: (String) -> Unit,
             modifier = Modifier
                 .weight(0.8f)
                 .fillMaxWidth()
-                .background(color = Color(red = 245, green = 245, blue = 221, alpha = 180)),
+                .background(color = Color(red = 225, green = 208, blue = 191)),
         ) {
             Row() {
                 val styles = listOf("Sporty", "Preppy", "Casual")
