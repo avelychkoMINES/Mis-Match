@@ -1,5 +1,6 @@
 package edu.mines.csci448.examples.camera
 
+import android.app.Fragment
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -18,22 +19,25 @@ import com.csci448.avelychko.mis_match.data.Photograph
 import com.csci448.avelychko.mis_match.presentation.PhotographScreen
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
-import edu.mines.csci448.examples.camera.data.Photograph
-import edu.mines.csci448.examples.camera.presentation.MainActivityScreen
-import edu.mines.csci448.examples.camera.presentation.viewmodel.PhotographViewModel
-import edu.mines.csci448.examples.camera.presentation.viewmodel.PhotographViewModelFactory
-import edu.mines.csci448.examples.camera.ui.theme.CameraTheme
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModelFactory
 import java.io.File
 import java.util.*
 
-class photoMainActivity : ComponentActivity() {
+class photoMainActivity : Fragment() {
     companion object {
         private const val LOG_TAG = "448.MainActivity"
     }
 
     private lateinit var photographViewModel: PhotographViewModel
 
-    // TODO #2 make camera launcher
+    val takePhotoLauncher = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { didTakePhoto ->
+        if(didTakePhoto) {
+            val photograph = Photograph("testImage.jpg")
+            photographViewModel.addPhotograph(photograph)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val viewModel = MisMatchViewModel();
@@ -42,7 +46,15 @@ class photoMainActivity : ComponentActivity() {
             val factory = PhotographViewModelFactory(this)
             photographViewModel = ViewModelProvider(this, factory)[factory.getViewModelClass()]
 
-            // TODO #2A - register camera launcher
+        takePicture = {
+            photoName = "IMG_${Date()}.JPG"
+            val photoFile = File(this@MainActivity, photoName)
+            val photoUri = FileProvider.getUriForFile(this@MainActivity,
+                "edu.mines.csci448.examples.camera.fileprovider",
+                photoFile)
+            takePhotoLauncher.launch(photoUri)
+        }
+
         val takePhotoLauncher = registerForActivityResult(
             ActivityResultContracts.TakePicture()
         ) { didTakePhoto ->
