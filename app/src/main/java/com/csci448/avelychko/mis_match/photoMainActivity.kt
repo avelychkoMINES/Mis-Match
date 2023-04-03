@@ -13,6 +13,11 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import com.csci448.avelychko.mis_match.MisMatchScreen
+import com.csci448.avelychko.mis_match.data.Photograph
+import com.csci448.avelychko.mis_match.presentation.PhotographScreen
+import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import edu.mines.csci448.examples.camera.data.Photograph
 import edu.mines.csci448.examples.camera.presentation.MainActivityScreen
 import edu.mines.csci448.examples.camera.presentation.viewmodel.PhotographViewModel
@@ -31,6 +36,7 @@ class photoMainActivity : ComponentActivity() {
     // TODO #2 make camera launcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val viewModel = MisMatchViewModel();
             super.onCreate(savedInstanceState)
 
             val factory = PhotographViewModelFactory(this)
@@ -53,7 +59,9 @@ class photoMainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        MainActivityScreen(
+                        MisMatchScreen(viewModel)
+
+                        PhotographScreen(
                             photographViewModel = photographViewModel,
                             takePicture = {
                                 photoName = "IMG_${Date()}.JPG"
