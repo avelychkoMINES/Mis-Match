@@ -1,4 +1,4 @@
-package edu.mines.csci448.examples.camera.data
+package com.csci448.avelychko.mis_match.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

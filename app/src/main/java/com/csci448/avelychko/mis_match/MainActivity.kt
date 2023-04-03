@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.FileProvider
 import androidx.navigation.compose.rememberNavController
+import com.csci448.avelychko.mis_match.data.Photograph
 import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
