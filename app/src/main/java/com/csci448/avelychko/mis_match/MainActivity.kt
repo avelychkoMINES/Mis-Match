@@ -45,8 +45,13 @@ class MainActivity : ComponentActivity() {
         }
 
         super.onCreate(savedInstanceState)
-
-        permissionLauncher
+        
+        permissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+                // process if permissions were granted
+                locationUtility.checkPermissionAndGetLocation(this@MainActivity, permissionLauncher)
+            }
+        cameraUtility = CameraUtility(this)
         cameraUtility.checkPermissionAndGetCamera()
 
 
