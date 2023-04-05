@@ -1,5 +1,8 @@
 package com.csci448.avelychko.mis_match
 
+import android.Manifest.permission.CAMERA
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.navigation.compose.rememberNavController
 import com.csci448.avelychko.mis_match.data.Photograph
@@ -31,6 +36,21 @@ class MainActivity : ComponentActivity() {
             if(didTakePhoto) {
                 val photograph = Photograph("testImage.jpg")
                 viewModel.addPhotograph(photograph)
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission( this@MainActivity, CAMERA ) == PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission( this@MainActivity, WRITE_EXTERNAL_STORAGE )
+            == PERMISSION_GRANTED) {
+
+        } else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this@MainActivity, CAMERA)
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this@MainActivity,
+                    WRITE_EXTERNAL_STORAGE)) {
+
+            } else {
+                permissionLauncher.launch( CAMERA )
+                permissionLauncher.launch( WRITE_EXTERNAL_STORAGE )
             }
         }
 
