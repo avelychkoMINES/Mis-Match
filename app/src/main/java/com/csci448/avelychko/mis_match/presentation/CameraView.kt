@@ -32,6 +32,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executor
 
+private suspend fun Context.getCameraProvider(): ProcessCameraProvider = suspendCoroutine { continuation ->
+    ProcessCameraProvider.getInstance(this).also { cameraProvider ->
+        cameraProvider.addListener({
+            continuation.resume(cameraProvider.get())
+        }, ContextCompat.getMainExecutor(this))
+    }
+}
+
 private fun takePhoto(
     filenameFormat: String,
     imageCapture: ImageCapture,
