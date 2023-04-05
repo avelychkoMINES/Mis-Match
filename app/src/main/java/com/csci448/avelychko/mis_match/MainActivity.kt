@@ -6,6 +6,7 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -19,14 +20,18 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.navigation.compose.rememberNavController
 import com.csci448.avelychko.mis_match.data.Photograph
+import com.csci448.avelychko.mis_match.presentation.navigation.CameraSpec
 import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
+import com.csci448.geolocatr.utils.CameraUtility
 import com.csci448.mis_match_start.presentation.HomeScreen
 import java.io.File
 import java.util.*
 
 class MainActivity : ComponentActivity() {
+    private lateinit var cameraUtility: CameraUtility
+    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     override fun onCreate(savedInstanceState: Bundle?) {
         val viewModel = MisMatchViewModel();
 
@@ -39,22 +44,12 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        if (ContextCompat.checkSelfPermission( this@MainActivity, CAMERA ) == PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission( this@MainActivity, WRITE_EXTERNAL_STORAGE )
-            == PERMISSION_GRANTED) {
-
-        } else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this@MainActivity, CAMERA)
-                    || ActivityCompat.shouldShowRequestPermissionRationale(this@MainActivity,
-                    WRITE_EXTERNAL_STORAGE)) {
-
-            } else {
-                permissionLauncher.launch( CAMERA )
-                permissionLauncher.launch( WRITE_EXTERNAL_STORAGE )
-            }
-        }
-
         super.onCreate(savedInstanceState)
+
+        permissionLauncher
+        cameraUtility.checkPermissionAndGetCamera()
+
+
         setContent {
             MisMatchTheme {
                 // A surface container using the 'background' color from the theme
