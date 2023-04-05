@@ -12,12 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.csci448.avelychko.mis_match.data.Photograph
-import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
 import com.csci448.avelychko.mis_match.util.CameraUtility
-import com.csci448.mis_match_start.presentation.HomeScreen
+import com.csci448.avelychko.mis_match.presentation.HomeScreen
 
 class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
