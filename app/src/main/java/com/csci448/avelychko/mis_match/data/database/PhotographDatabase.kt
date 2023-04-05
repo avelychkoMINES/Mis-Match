@@ -6,7 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import edu.mines.csci448.examples.camera.data.Photograph
+import com.csci448.avelychko.mis_match.data.Photograph
 
 @Database(entities=[Photograph::class], version=1)
 @TypeConverters(PhotographTypeConverters::class)

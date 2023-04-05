@@ -1,4 +1,4 @@
-package com.csci448.geolocatr.utils
+package com.csci448.avelychko.mis_match.util
 
 import android.Manifest
 import android.Manifest.permission.*
