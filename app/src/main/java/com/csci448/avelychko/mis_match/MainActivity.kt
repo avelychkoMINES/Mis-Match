@@ -20,6 +20,7 @@ import com.csci448.avelychko.mis_match.presentation.HomeScreen
 class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
+    private lateinit var viewBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val viewModel = MisMatchViewModel();

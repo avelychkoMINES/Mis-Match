@@ -35,8 +35,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executor
 
-private fun startCamera() {
-   val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+private fun startCamera(context: Context) {
+   val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
 
    cameraProviderFuture.addListener({
        // Used to bind the lifecycle of cameras to the lifecycle owner
@@ -61,7 +61,7 @@ private fun startCamera() {
                this, cameraSelector, preview)
 
        } catch(exc: Exception) {
-           Log.e(TAG, "Use case binding failed", exc)
+           Log.e("CameraView", "Use case binding failed", exc)
        }
 
    }, ContextCompat.getMainExecutor(this))
