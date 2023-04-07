@@ -25,19 +25,12 @@ class CameraUtility(context: Context) {
     fun checkPermissionAndGetCamera(activity: Activity,
                                       permissionLauncher: ActivityResultLauncher<Array<String>>) {
 
-        if (ContextCompat.checkSelfPermission( activity, CAMERA) == PERMISSION_GRANTED
-            || ContextCompat.checkSelfPermission( activity,
-                WRITE_EXTERNAL_STORAGE
-            )
-            == PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission( activity, CAMERA) == PERMISSION_GRANTED) {
             Log.d("CameraUtility", "have permission")
             //TODO
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
                     CAMERA
-                )
-                || ActivityCompat.shouldShowRequestPermissionRationale(activity,
-                    WRITE_EXTERNAL_STORAGE
                 )) {
                 Log.d("CameraUtility", "permission denied")
                 //val currentContext = LocalContext.current
@@ -50,7 +43,7 @@ class CameraUtility(context: Context) {
                     .show()
             } else {
                 Log.d("CameraUtility", "getting permission")
-                permissionLauncher.launch(arrayOf( CAMERA, WRITE_EXTERNAL_STORAGE))
+                permissionLauncher.launch(arrayOf( CAMERA ))
             }
         }
     }
