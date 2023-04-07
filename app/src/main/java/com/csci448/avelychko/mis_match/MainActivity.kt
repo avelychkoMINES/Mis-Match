@@ -1,5 +1,6 @@
 package com.csci448.avelychko.mis_match
 
+import SimpleCameraPreview
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,13 +16,12 @@ import androidx.navigation.compose.rememberNavController
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
 import com.csci448.avelychko.mis_match.util.CameraUtility
-import com.csci448.avelychko.mis_match.presentation.HomeScreen
-import com.csci448.avelychko.mis_match.databinding.ActivityMainBinding
+import com.csci448.avelychko.mis_match.presentation.Tests
+import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
 
 class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
-    private lateinit var viewBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val viewModel = MisMatchViewModel();
@@ -41,16 +41,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //MisMatchScreen(viewModel)
-                    HomeScreen(
-                        viewModel = viewModel,
-                        onOutfitBuilderClick = { /*TODO*/ },
-                        onSavedOutfitsClick = { /*TODO*/ },
-                        onStyleGeneratorClick = { /*TODO*/ },
-                        onClosetClick = { /*TODO*/ },
-                        ) {
-                        cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
-                    }
+                    MisMatchScreen(viewModel, cameraUtility, permissionLauncher)
+
+                    SimpleCameraPreview()
+
+                    Tests(
+                        { cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher) },
+                        {})
+//                    HomeScreen(
+//                        viewModel = viewModel,
+//                        onOutfitBuilderClick = { /*TODO*/ },
+//                        onSavedOutfitsClick = { /*TODO*/ },
+//                        onStyleGeneratorClick = { /*TODO*/ },
+//                        onClosetClick = { /*TODO*/ },
+//                        ) {
+//                        cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
+//                    }
                 }
             }
         }
@@ -58,9 +64,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MisMatchScreen(viewModel: MisMatchViewModel) {
+fun MisMatchScreen(
+    viewModel: MisMatchViewModel,
+    cameraUtility: CameraUtility,
+    permissionLauncher: ActivityResultLauncher<Array<String>>
+) {
     val navController = rememberNavController()
-    //MisMatchNavHost(navController = navController, viewModel = viewModel )
+    MisMatchNavHost(navController = navController, viewModel = viewModel, cameraUtility, permissionLauncher )
 }
 
 @Preview(showBackground = true)
@@ -68,6 +78,5 @@ fun MisMatchScreen(viewModel: MisMatchViewModel) {
 fun DefaultPreview() {
     val viewModel = MisMatchViewModel();
     MisMatchTheme {
-        MisMatchScreen(viewModel = viewModel)
     }
 }
