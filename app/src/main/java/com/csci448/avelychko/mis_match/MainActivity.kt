@@ -42,6 +42,15 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //MisMatchScreen(viewModel)
+                    var showView by remember {mutableState(false)}
+
+                    Modifier.clickable {
+                      showView = true
+                    }
+
+                    if(showView) {
+                      SimpleCameraPreview()
+                    }
                     HomeScreen(
                         viewModel = viewModel,
                         onOutfitBuilderClick = { /*TODO*/ },
