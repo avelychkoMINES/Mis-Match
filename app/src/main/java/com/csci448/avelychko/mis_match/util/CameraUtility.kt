@@ -16,12 +16,13 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavHostController
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executor
 
-class CameraUtility(context: Context) {
+class CameraUtility(context: Context, navHostController: NavHostController) {
     fun checkPermissionAndGetCamera(activity: Activity,
                                       permissionLauncher: ActivityResultLauncher<Array<String>>) {
 
@@ -44,6 +45,7 @@ class CameraUtility(context: Context) {
             } else {
                 Log.d("CameraUtility", "getting permission")
                 permissionLauncher.launch(arrayOf( CAMERA ))
+                navHostController
             }
         }
     }

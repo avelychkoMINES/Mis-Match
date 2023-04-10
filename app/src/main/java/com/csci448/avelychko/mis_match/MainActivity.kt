@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.csci448.avelychko.mis_match.presentation.HomeScreen
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
 import com.csci448.avelychko.mis_match.util.CameraUtility
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
                 // process if permissions were granted
                 cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
             }
-        cameraUtility = CameraUtility(this@MainActivity)
+        cameraUtility = CameraUtility(this@MainActivity, )
 
         setContent {
             MisMatchTheme {
@@ -43,20 +44,17 @@ class MainActivity : ComponentActivity() {
                 ) {
                     MisMatchScreen(viewModel, cameraUtility, permissionLauncher)
 
-                    SimpleCameraPreview()
 
-                    Tests(
-                        { cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher) },
-                        {})
-//                    HomeScreen(
-//                        viewModel = viewModel,
-//                        onOutfitBuilderClick = { /*TODO*/ },
-//                        onSavedOutfitsClick = { /*TODO*/ },
-//                        onStyleGeneratorClick = { /*TODO*/ },
-//                        onClosetClick = { /*TODO*/ },
-//                        ) {
-//                        cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
-//                    }
+
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onOutfitBuilderClick = { /*TODO*/ },
+                        onSavedOutfitsClick = { /*TODO*/ },
+                        onStyleGeneratorClick = { /*TODO*/ },
+                        onClosetClick = { /*TODO*/ },
+                        ) {
+                        cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
+                    }
                 }
             }
         }
