@@ -91,8 +91,7 @@ fun OutfitBuilderView(onLogoClicked: () -> Unit) {
                 )
             }
         }
-        }
-
+    }
 }
 
 @Preview(showBackground = true)
