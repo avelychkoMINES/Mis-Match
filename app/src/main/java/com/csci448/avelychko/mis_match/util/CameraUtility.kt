@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executor
 
-class CameraUtility(context: Context, navHostController: NavHostController) {
+class CameraUtility(context: Context) {
     fun checkPermissionAndGetCamera(activity: Activity,
                                       permissionLauncher: ActivityResultLauncher<Array<String>>) {
 
@@ -45,7 +45,6 @@ class CameraUtility(context: Context, navHostController: NavHostController) {
             } else {
                 Log.d("CameraUtility", "getting permission")
                 permissionLauncher.launch(arrayOf( CAMERA ))
-                navHostController
             }
         }
     }

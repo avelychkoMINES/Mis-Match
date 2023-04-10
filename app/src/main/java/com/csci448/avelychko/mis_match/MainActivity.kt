@@ -1,6 +1,8 @@
 package com.csci448.avelychko.mis_match
 
 import SimpleCameraPreview
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -33,7 +35,7 @@ class MainActivity : ComponentActivity() {
                 // process if permissions were granted
                 cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
             }
-        cameraUtility = CameraUtility(this@MainActivity, )
+        cameraUtility = CameraUtility(this@MainActivity)
 
         setContent {
             MisMatchTheme {
@@ -42,19 +44,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MisMatchScreen(viewModel, cameraUtility, permissionLauncher)
+                    MisMatchScreen(viewModel, this@MainActivity, cameraUtility, permissionLauncher)
 
-
-
-                    HomeScreen(
-                        viewModel = viewModel,
-                        onOutfitBuilderClick = { /*TODO*/ },
-                        onSavedOutfitsClick = { /*TODO*/ },
-                        onStyleGeneratorClick = { /*TODO*/ },
-                        onClosetClick = { /*TODO*/ },
-                        ) {
-                        cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
-                    }
+//                    HomeScreen(
+//                        viewModel = viewModel,
+//                        onOutfitBuilderClick = { /*TODO*/ },
+//                        onSavedOutfitsClick = { /*TODO*/ },
+//                        onStyleGeneratorClick = { /*TODO*/ },
+//                        onClosetClick = { /*TODO*/ },
+//                        ) {
+//                        cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
+//                    }
                 }
             }
         }
@@ -64,11 +64,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MisMatchScreen(
     viewModel: MisMatchViewModel,
+    activity: Activity,
     cameraUtility: CameraUtility,
     permissionLauncher: ActivityResultLauncher<Array<String>>
 ) {
     val navController = rememberNavController()
-    MisMatchNavHost(navController = navController, viewModel = viewModel, cameraUtility, permissionLauncher )
+    MisMatchNavHost(navController = navController, activity = activity, viewModel = viewModel,
+        cameraUtility = cameraUtility, permissionLauncher = permissionLauncher )
 }
 
 @Preview(showBackground = true)
