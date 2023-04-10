@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Mis-Match</string>
+
+    <string name="name_monster_mike">Mike Wazowski</string>
+    <string name="description_monster_mike">Eager to scare!</string>
+    <string name="name_monster_don_carlton">Don Carlton</string>
+    <string name="description_monster_don_carlton">President of Oozma Kappa, former salesman</string>
+    <string name="name_monster_randy_boggs">Randy Boggs</string>
+    <string name="description_monster_randy_boggs">Member of Roar Omega Roar</string>
+    <string name="name_monster_art">Art</string>
+    <string name="description_monster_art">Member of Oozma Kappa, the ultimate free spirit</string>
+    <string name="name_monster_james_p_sullivan">James P. Sullivan</string>
+    <string name="description_monster_james_p_sullivan">Stole Fear Tech\'s mascot Archie the Scare Pig</string>
+    <string name="name_monster_ms_squibbles">Ms. Sheri Squibbles</string>
+    <string name="description_monster_ms_squibbles">Mother of Scott \"Squishy\" Squibbles, the best mom in Monstropolis</string>
+    <string name="name_monster_squishy">Scott \"Squishy\" Squibbles</string>
+    <string name="description_monster_squishy">Member of Oozma Kappa, first year student at Monsters University</string>
+    <string name="name_monster_professor_knight">Professor Knight</string>
+    <string name="description_monster_professor_knight">Professor MU School of Scaring, teaches Scaring 101</string>
+    <string name="name_monster_johnny_worthington">Johnny Worthington III</string>
+    <string name="description_monster_johnny_worthington">President of Roar Omega Roar, top scare student at Monsters University</string>
+    <string name="name_mascot_archie">Archie the Scare Pig</string>
+    <string name="description_mascot_archie">Mascot of Fear Tech, Monsters University\'s rival school</string>
+    <string name="name_monster_terri_terry">Terri and Terry Perry</string>
+    <string name="description_monster_terri_terry">Members of Oozma Kappa, Terri is a Dance Major while Terry is an English major</string>
+    <string name="name_villian_dean_hardscrabble">Dean Dr. Abigal Hardscrabble</string>
+    <string name="description_villian_dean_hardscrabble">Legendary Scarer and Dean of the School of Scaring at Monsters University</string>
+
 </resources>
