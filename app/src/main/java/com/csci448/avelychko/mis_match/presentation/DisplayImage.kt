@@ -1,3 +1,5 @@
+import androidx.compose.foundation.Image
+
 @Composable
 fun ImageDisplay(picture: Picture?) {
     if (picture != null) {
