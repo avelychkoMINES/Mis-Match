@@ -17,6 +17,6 @@ object OutfitBuilderSpec: IScreenSpec {
                          activity: Activity, cameraUtility: CameraUtility,
                          permissionLauncher: ActivityResultLauncher<Array<String>>
     ) {
-        OutfitBuilderView() { navController.navigate("home") }
+        OutfitBuilderView(viewModel) { navController.navigate("home") }
     }
 }

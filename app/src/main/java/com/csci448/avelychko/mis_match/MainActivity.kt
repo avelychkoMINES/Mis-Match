@@ -15,11 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.csci448.avelychko.mis_match.data.database.PictureRepo
 import com.csci448.avelychko.mis_match.presentation.HomeScreen
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
 import com.csci448.avelychko.mis_match.util.CameraUtility
-import com.csci448.avelychko.mis_match.presentation.Tests
 import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val viewModel = MisMatchViewModel();
+        val viewModel = MisMatchViewModel(PictureRepo.topList, PictureRepo.bottomList, PictureRepo.shoesList);
         super.onCreate(savedInstanceState)
         
         permissionLauncher =
@@ -73,10 +73,10 @@ fun MisMatchScreen(
         cameraUtility = cameraUtility, permissionLauncher = permissionLauncher )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    val viewModel = MisMatchViewModel();
-    MisMatchTheme {
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    val viewModel = MisMatchViewModel();
+//    MisMatchTheme {
+//    }
+//}

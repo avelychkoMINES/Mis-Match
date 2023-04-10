@@ -7,9 +7,6 @@ import com.csci448.avelychko.mis_match.data.database.Picture
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class MisMatchViewModel(val topList: List<Picture>, val bottomList: List<Picture>, val shoeList: List<Picture>) {
-    private val mTopPictureList: List<Photograph> = emptyList()
-    private val mBottomPictureList: List<Photograph> = emptyList()
-    private val mShoesPictureList: List<Photograph> = emptyList()
     val selectedTopState: MutableState<Picture?> = mutableStateOf(null);
     val selectedBottomState: MutableState<Picture?> = mutableStateOf(null);
     val selectedShoeState: MutableState<Picture?> = mutableStateOf(null);

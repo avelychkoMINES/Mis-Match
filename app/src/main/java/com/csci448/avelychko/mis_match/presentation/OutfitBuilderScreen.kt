@@ -17,11 +17,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.csci448.avelychko.mis_match.R
+import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OutfitBuilderView(onLogoClicked: () -> Unit) {
+fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
     val context = LocalContext.current
 
     Column() {
@@ -44,34 +46,90 @@ fun OutfitBuilderView(onLogoClicked: () -> Unit) {
             //ARROW & IMAGE
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
-                Column() {
-                    Spacer(modifier = Modifier.height(220.dp))
-                    IconButton(onClick = { Toast.makeText(context, "Shows previous top", Toast.LENGTH_SHORT).show() }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+                Box() {
+                    Row() {
+                        IconButton(onClick = {
+                            viewModel.moveToPrevTop()
+                            Toast.makeText(context, "Shows previous top", Toast.LENGTH_SHORT).show() }) {
+                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+                            Box() {
+
+                            }
+                            IconButton(onClick = {
+                                viewModel.moveToNextTop()
+                                Toast.makeText(context, "Shows next top", Toast.LENGTH_SHORT).show() }) {
+                                Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
+                            }
+                        }
                     }
-                    Spacer(modifier = Modifier.height(150.dp))
-                    IconButton(onClick = { Toast.makeText(context, "Shows previous bottoms", Toast.LENGTH_SHORT).show() }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+                    Row() {
+                        IconButton(onClick = {
+                            viewModel.moveToPrevBottom()
+                            Toast.makeText(context, "Shows previous bottoms", Toast.LENGTH_SHORT).show() }) {
+                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+                        }
+
+                        IconButton(onClick = {
+                            viewModel.moveToNextBottom()
+                            Toast.makeText(context, "Shows next bottoms", Toast.LENGTH_SHORT).show() }) {
+                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "",)
+                        }
                     }
-                    Spacer(modifier = Modifier.height(150.dp))
-                    IconButton(onClick = { Toast.makeText(context, "Shows previous shoes", Toast.LENGTH_SHORT).show() }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+                    Row() {
+                        IconButton(onClick = {
+                            viewModel.moveToPrevShoe()
+                            Toast.makeText(context, "Shows previous shoes", Toast.LENGTH_SHORT).show() }) {
+                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+                        }
+
+                        IconButton(onClick = {
+                            viewModel.moveToNextShoe()
+                            Toast.makeText(context, "Shows next shoes", Toast.LENGTH_SHORT).show() }) {
+                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
+                        }
                     }
+
                 }
-                Column() {
-                    Spacer(modifier = Modifier.height(220.dp))
-                    IconButton(onClick = { Toast.makeText(context, "Shows next top", Toast.LENGTH_SHORT).show() }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
-                    }
-                    Spacer(modifier = Modifier.height(150.dp))
-                    IconButton(onClick = { Toast.makeText(context, "Shows next bottoms", Toast.LENGTH_SHORT).show() }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "",)
-                    }
-                    Spacer(modifier = Modifier.height(150.dp))
-                    IconButton(onClick = { Toast.makeText(context, "Shows next shoes", Toast.LENGTH_SHORT).show() }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
-                    }
-                }
+//                Column() {
+//                    Spacer(modifier = Modifier.height(220.dp))
+//                    IconButton(onClick = {
+//                        viewModel.moveToPrevTop()
+//                        Toast.makeText(context, "Shows previous top", Toast.LENGTH_SHORT).show() }) {
+//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+//                    }
+//                    Spacer(modifier = Modifier.height(150.dp))
+//                    IconButton(onClick = {
+//                        viewModel.moveToPrevBottom()
+//                        Toast.makeText(context, "Shows previous bottoms", Toast.LENGTH_SHORT).show() }) {
+//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+//                    }
+//                    Spacer(modifier = Modifier.height(150.dp))
+//                    IconButton(onClick = {
+//                        viewModel.moveToPrevShoe()
+//                        Toast.makeText(context, "Shows previous shoes", Toast.LENGTH_SHORT).show() }) {
+//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
+//                    }
+//                }
+//                Column() {
+//                    Spacer(modifier = Modifier.height(220.dp))
+//                    IconButton(onClick = {
+//                        viewModel.moveToNextTop()
+//                        Toast.makeText(context, "Shows next top", Toast.LENGTH_SHORT).show() }) {
+//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
+//                    }
+//                    Spacer(modifier = Modifier.height(150.dp))
+//                    IconButton(onClick = {
+//                        viewModel.moveToNextBottom()
+//                        Toast.makeText(context, "Shows next bottoms", Toast.LENGTH_SHORT).show() }) {
+//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "",)
+//                    }
+//                    Spacer(modifier = Modifier.height(150.dp))
+//                    IconButton(onClick = {
+//                        viewModel.moveToNextShoe()
+//                        Toast.makeText(context, "Shows next shoes", Toast.LENGTH_SHORT).show() }) {
+//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
+//                    }
+//                }
             }
             //HEART
 
@@ -94,8 +152,8 @@ fun OutfitBuilderView(onLogoClicked: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun OutfitBuilderPreview() {
-    OutfitBuilderView() {}
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun OutfitBuilderPreview() {
+//    OutfitBuilderView() {}
+//}
