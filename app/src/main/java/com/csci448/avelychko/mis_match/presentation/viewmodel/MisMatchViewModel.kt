@@ -28,17 +28,27 @@ class MisMatchViewModel(val topList: List<Picture>, val bottomList: List<Picture
     }
     
     fun moveToNextBottom() {
+        indexBottom++
+        selectedBottomState.value = bottomList[indexBottom]
     }
     
     fun moveToNextShoe() {
+        indexShoe++
+        selectedShoeState.value = shoeList[indexShoe]
     }
     
     fun moveToPrevTop() {
+        indexTop--
+        selectedTopState.value = topList[indexTop]
     }
     
     fun moveToPrevBottom() {
+        indexBottom--
+        selectedBottomState.value = bottomList[indexBottom]
     }
     
     fun moveToPrevShoe() {
+        indexShoe--
+        selectedShoeState.value = shoeList[indexShoe]
     }
 }
