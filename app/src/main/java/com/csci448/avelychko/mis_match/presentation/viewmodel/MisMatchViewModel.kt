@@ -21,7 +21,7 @@ class MisMatchViewModel(val topList: List<Picture>, val bottomList: List<Picture
     
     fun moveToNextTop() {
         indexTop++
-        if (indexTop >= topList.length()) {
+        if (indexTop >= topList.size) {
             indexTop = 0
         }
         selectedTopState.value = topList[indexTop]
@@ -29,7 +29,7 @@ class MisMatchViewModel(val topList: List<Picture>, val bottomList: List<Picture
     
     fun moveToNextBottom() {
         indexBottom++
-        if (indexBottom >= bottomList.length()) {
+        if (indexBottom >= bottomList.size) {
             indexBottom = 0
         }
         selectedBottomState.value = bottomList[indexBottom]
@@ -37,7 +37,7 @@ class MisMatchViewModel(val topList: List<Picture>, val bottomList: List<Picture
     
     fun moveToNextShoe() {
         indexShoe++
-        if (indexShoe >= shoeList.length()) {
+        if (indexShoe >= shoeList.size) {
             indexShoe = 0
         }
         selectedShoeState.value = shoeList[indexShoe]
@@ -46,7 +46,7 @@ class MisMatchViewModel(val topList: List<Picture>, val bottomList: List<Picture
     fun moveToPrevTop() {
         indexTop--
         if (indexTop < 0) {
-            indexTop = topList.length - 1
+            indexTop = topList.size - 1
         }
         selectedTopState.value = topList[indexTop]
     }
@@ -54,16 +54,16 @@ class MisMatchViewModel(val topList: List<Picture>, val bottomList: List<Picture
     fun moveToPrevBottom() {
         indexBottom--
         if (indexBottom < 0) {
-            indexBottom = bottomList.length - 1
+            indexBottom = bottomList.size - 1
         }
         selectedBottomState.value = bottomList[indexBottom]
     }
     
     fun moveToPrevShoe() {
-        if (indexShoe < 0) {
-            indexShoe = shoeList.length - 1
-        }
         indexShoe--
+        if (indexShoe < 0) {
+            indexShoe = shoeList.size - 1
+        }
         selectedShoeState.value = shoeList[indexShoe]
     }
 }

@@ -48,7 +48,7 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 Box() {
                     Column() {
-                        Row() {
+                        Row(modifier = Modifier.fillMaxHeight(0.3f).fillMaxWidth()) {
                             IconButton(onClick = {
                                 viewModel.moveToPrevTop()
                                 Toast.makeText(context, "Shows previous top", Toast.LENGTH_SHORT)
@@ -58,7 +58,8 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                                     painter = painterResource(id = R.drawable.baseline_chevron_left_24),
                                     contentDescription = ""
                                 )
-                                Box() {
+                            }
+                                Box(modifier = Modifier.fillMaxWidth(0.8f)) {
                                     ImageDisplay(viewModel.selectedTopState.value)
                                 }
                                 IconButton(onClick = {
@@ -72,8 +73,8 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                                     )
                                 }
                             }
-                        }
-                        Row() {
+
+                        Row(modifier = Modifier.fillMaxHeight(0.4f).fillMaxWidth()) {
                             IconButton(onClick = {
                                 viewModel.moveToPrevBottom()
                                 Toast.makeText(
@@ -87,7 +88,7 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                                     contentDescription = ""
                                 )
                             }
-                            Box() {
+                            Box(modifier = Modifier.fillMaxWidth(0.8f)) {
                                 ImageDisplay(viewModel.selectedBottomState.value)
                             }
 
@@ -102,7 +103,7 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                                 )
                             }
                         }
-                        Row() {
+                        Row(modifier = Modifier.fillMaxHeight(0.3f).fillMaxWidth()) {
                             IconButton(onClick = {
                                 viewModel.moveToPrevShoe()
                                 Toast.makeText(context, "Shows previous shoes", Toast.LENGTH_SHORT)
@@ -113,7 +114,7 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                                     contentDescription = ""
                                 )
                             }
-                            Box() {
+                            Box(modifier = Modifier.fillMaxWidth(0.8f)) {
                                 ImageDisplay(viewModel.selectedShoeState.value)
                             }
 
@@ -130,50 +131,8 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                         }
                     }
                 }
-//                Column() {
-//                    Spacer(modifier = Modifier.height(220.dp))
-//                    IconButton(onClick = {
-//                        viewModel.moveToPrevTop()
-//                        Toast.makeText(context, "Shows previous top", Toast.LENGTH_SHORT).show() }) {
-//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
-//                    }
-//                    Spacer(modifier = Modifier.height(150.dp))
-//                    IconButton(onClick = {
-//                        viewModel.moveToPrevBottom()
-//                        Toast.makeText(context, "Shows previous bottoms", Toast.LENGTH_SHORT).show() }) {
-//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
-//                    }
-//                    Spacer(modifier = Modifier.height(150.dp))
-//                    IconButton(onClick = {
-//                        viewModel.moveToPrevShoe()
-//                        Toast.makeText(context, "Shows previous shoes", Toast.LENGTH_SHORT).show() }) {
-//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
-//                    }
-//                }
-//                Column() {
-//                    Spacer(modifier = Modifier.height(220.dp))
-//                    IconButton(onClick = {
-//                        viewModel.moveToNextTop()
-//                        Toast.makeText(context, "Shows next top", Toast.LENGTH_SHORT).show() }) {
-//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
-//                    }
-//                    Spacer(modifier = Modifier.height(150.dp))
-//                    IconButton(onClick = {
-//                        viewModel.moveToNextBottom()
-//                        Toast.makeText(context, "Shows next bottoms", Toast.LENGTH_SHORT).show() }) {
-//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "",)
-//                    }
-//                    Spacer(modifier = Modifier.height(150.dp))
-//                    IconButton(onClick = {
-//                        viewModel.moveToNextShoe()
-//                        Toast.makeText(context, "Shows next shoes", Toast.LENGTH_SHORT).show() }) {
-//                        Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
-//                    }
-//                }
             }
-            //HEART
-
-            }
+        }
 
         Row(modifier = Modifier
             .fillMaxWidth()
