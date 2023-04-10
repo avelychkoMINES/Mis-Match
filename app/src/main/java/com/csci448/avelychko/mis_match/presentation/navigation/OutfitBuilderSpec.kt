@@ -5,7 +5,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
-import com.csci448.avelychko.mis_match.ui.theme.OutfitBuilderView
+import com.csci448.avelychko.mis_match.presentation.OutfitBuilderView
 import com.csci448.avelychko.mis_match.util.CameraUtility
 
 object OutfitBuilderSpec: IScreenSpec {

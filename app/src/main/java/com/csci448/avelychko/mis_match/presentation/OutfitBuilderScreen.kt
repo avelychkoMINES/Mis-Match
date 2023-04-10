@@ -1,4 +1,4 @@
-package com.csci448.avelychko.mis_match.ui.theme
+package com.csci448.avelychko.mis_match.presentation
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -47,48 +47,88 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 Box() {
-                    Row() {
-                        IconButton(onClick = {
-                            viewModel.moveToPrevTop()
-                            Toast.makeText(context, "Shows previous top", Toast.LENGTH_SHORT).show() }) {
-                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
-                            Box() {
-
-                            }
+                    Column() {
+                        Row() {
                             IconButton(onClick = {
-                                viewModel.moveToNextTop()
-                                Toast.makeText(context, "Shows next top", Toast.LENGTH_SHORT).show() }) {
-                                Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
+                                viewModel.moveToPrevTop()
+                                Toast.makeText(context, "Shows previous top", Toast.LENGTH_SHORT)
+                                    .show()
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.baseline_chevron_left_24),
+                                    contentDescription = ""
+                                )
+                                Box() {
+                                    ImageDisplay(viewModel.selectedTopState.value)
+                                }
+                                IconButton(onClick = {
+                                    viewModel.moveToNextTop()
+                                    Toast.makeText(context, "Shows next top", Toast.LENGTH_SHORT)
+                                        .show()
+                                }) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.baseline_chevron_right_24),
+                                        contentDescription = ""
+                                    )
+                                }
+                            }
+                        }
+                        Row() {
+                            IconButton(onClick = {
+                                viewModel.moveToPrevBottom()
+                                Toast.makeText(
+                                    context,
+                                    "Shows previous bottoms",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.baseline_chevron_left_24),
+                                    contentDescription = ""
+                                )
+                            }
+                            Box() {
+                                ImageDisplay(viewModel.selectedBottomState.value)
+                            }
+
+                            IconButton(onClick = {
+                                viewModel.moveToNextBottom()
+                                Toast.makeText(context, "Shows next bottoms", Toast.LENGTH_SHORT)
+                                    .show()
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.baseline_chevron_right_24),
+                                    contentDescription = "",
+                                )
+                            }
+                        }
+                        Row() {
+                            IconButton(onClick = {
+                                viewModel.moveToPrevShoe()
+                                Toast.makeText(context, "Shows previous shoes", Toast.LENGTH_SHORT)
+                                    .show()
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.baseline_chevron_left_24),
+                                    contentDescription = ""
+                                )
+                            }
+                            Box() {
+                                ImageDisplay(viewModel.selectedShoeState.value)
+                            }
+
+                            IconButton(onClick = {
+                                viewModel.moveToNextShoe()
+                                Toast.makeText(context, "Shows next shoes", Toast.LENGTH_SHORT)
+                                    .show()
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.baseline_chevron_right_24),
+                                    contentDescription = ""
+                                )
                             }
                         }
                     }
-                    Row() {
-                        IconButton(onClick = {
-                            viewModel.moveToPrevBottom()
-                            Toast.makeText(context, "Shows previous bottoms", Toast.LENGTH_SHORT).show() }) {
-                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
-                        }
-
-                        IconButton(onClick = {
-                            viewModel.moveToNextBottom()
-                            Toast.makeText(context, "Shows next bottoms", Toast.LENGTH_SHORT).show() }) {
-                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "",)
-                        }
-                    }
-                    Row() {
-                        IconButton(onClick = {
-                            viewModel.moveToPrevShoe()
-                            Toast.makeText(context, "Shows previous shoes", Toast.LENGTH_SHORT).show() }) {
-                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_left_24), contentDescription = "")
-                        }
-
-                        IconButton(onClick = {
-                            viewModel.moveToNextShoe()
-                            Toast.makeText(context, "Shows next shoes", Toast.LENGTH_SHORT).show() }) {
-                            Icon(painter = painterResource(id = R.drawable.baseline_chevron_right_24), contentDescription = "")
-                        }
-                    }
-
                 }
 //                Column() {
 //                    Spacer(modifier = Modifier.height(220.dp))

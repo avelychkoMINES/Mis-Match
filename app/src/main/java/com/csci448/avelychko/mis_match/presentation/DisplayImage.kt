@@ -1,3 +1,5 @@
+package com.csci448.avelychko.mis_match.presentation
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
