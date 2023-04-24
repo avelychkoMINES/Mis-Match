@@ -3,7 +3,9 @@ package com.csci448.avelychko.mis_match.presentation
 import SimpleCameraPreview
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
@@ -26,13 +28,16 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.csci448.avelychko.mis_match.R
+import java.io.File
 
 @Composable
-fun CameraView(imageCapture: ImageCapture?) {
+fun CameraView(imageCaptureM: ImageCapture?) {
+    val imageCapture = ImageCapture.Builder()
+        .build()
     val context = LocalContext.current
 
     Box {
-        SimpleCameraPreview()
+        SimpleCameraPreview(imageCapture)
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -103,8 +108,8 @@ fun CameraView(imageCapture: ImageCapture?) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         IconButton(onClick = {
-                            Toast.makeText(context, "Takes a picture", Toast.LENGTH_SHORT).show()
-                            takePhoto(imageCapture)
+                            //Toast.makeText(context, "Takes a picture", Toast.LENGTH_SHORT).show()
+                            takePhoto(imageCapture, context)
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.baseline_circle_24),
@@ -119,26 +124,36 @@ fun CameraView(imageCapture: ImageCapture?) {
     }
 }
 
-private fun takePhoto(imageCapture: ImageCapture?) {
+private fun takePhoto(imageCapture: ImageCapture?, context: Context) {
+    Log.d(TAG, "takephoto() called")
+
     // Get a stable reference of the modifiable image capture use case
     val imageCapture = imageCapture ?: return
 
     // Create time stamped name and MediaStore entry.
-    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.current)
-        .format(System.currentTimeMillis())
-    val contentValues = ContentValues().apply {
-        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
-        }
-    }
+//    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.current)
+//        .format(System.currentTimeMillis())
+    val contentValues = ContentValues()
+//        .apply {
+//        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+//        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+//            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
+//        }
+//    }
     Log.d(TAG, "contentValues: $contentValues")
 
     // Create output options object which contains file + metadata
+//    val outputOptions = ImageCapture.OutputFileOptions
+//        .Builder(contentResolver,
+//            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//            contentValues)
+//        .build()
+
+    val file = File("com.csci448.avelychko.mis_match")
     val outputOptions = ImageCapture.OutputFileOptions
-        .Builder(contentResolver,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+        .Builder(context.contentResolver,
+            Uri.fromFile(file),
             contentValues)
         .build()
     Log.d(TAG, "outputoptions: $outputOptions")
@@ -147,7 +162,7 @@ private fun takePhoto(imageCapture: ImageCapture?) {
     // been taken
     imageCapture.takePicture(
         outputOptions,
-        ContextCompat.getMainExecutor(this),
+        ContextCompat.getMainExecutor(context),
         object : ImageCapture.OnImageSavedCallback {
             override fun onError(exc: ImageCaptureException) {
                 Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
@@ -156,7 +171,7 @@ private fun takePhoto(imageCapture: ImageCapture?) {
             override fun
                     onImageSaved(output: ImageCapture.OutputFileResults){
                 val msg = "Photo capture succeeded: ${output.savedUri}"
-                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, msg)
             }
         }

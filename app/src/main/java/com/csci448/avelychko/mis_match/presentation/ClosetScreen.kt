@@ -45,7 +45,7 @@ fun ClosetView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Tops",
                         fontSize = 24.sp)
-                    LazyRow(content = { viewModel.topList })
+                    //LazyRow(content = { items(viewModel.topList) { item -> } })
 //                    Row(modifier = Modifier
 //                        .padding(10.dp),
 //                    ) {

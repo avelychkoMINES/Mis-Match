@@ -1,4 +1,5 @@
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -40,7 +41,7 @@ import androidx.core.content.ContextCompat
 //    })
 //}
 @Composable
-fun SimpleCameraPreview() {
+fun SimpleCameraPreview(imageCapture: ImageCapture?) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
@@ -63,7 +64,8 @@ fun SimpleCameraPreview() {
                 cameraProvider.bindToLifecycle(
                     lifecycleOwner,
                     cameraSelector,
-                    preview
+                    preview,
+                    imageCapture
                 )
             }, executor)
             previewView
