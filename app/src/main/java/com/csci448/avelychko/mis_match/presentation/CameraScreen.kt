@@ -133,6 +133,7 @@ private fun takePhoto(imageCapture: ImageCapture?) {
             put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
         }
     }
+    Log.d(TAG, "contentValues: $contentValues")
 
     // Create output options object which contains file + metadata
     val outputOptions = ImageCapture.OutputFileOptions
@@ -140,6 +141,7 @@ private fun takePhoto(imageCapture: ImageCapture?) {
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             contentValues)
         .build()
+    Log.d(TAG, "outputoptions: $outputOptions")
 
     // Set up image capture listener, which is triggered after photo has
     // been taken
