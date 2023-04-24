@@ -23,7 +23,6 @@ import androidx.camera.core.ImageCapture;
 class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
-    private var imageCapture: ImageCapture? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val viewModel = MisMatchViewModel(PictureRepo.topList, PictureRepo.bottomList, PictureRepo.shoesList);
@@ -43,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MisMatchScreen(viewModel, this@MainActivity, cameraUtility, permissionLauncher, imageCapture)
+                    MisMatchScreen(viewModel, this@MainActivity, cameraUtility, permissionLauncher)
 
 //                    HomeScreen(
 //                        viewModel = viewModel,
@@ -65,13 +64,12 @@ fun MisMatchScreen(
     viewModel: MisMatchViewModel,
     activity: Activity,
     cameraUtility: CameraUtility,
-    permissionLauncher: ActivityResultLauncher<Array<String>>,
-    imageCapture: ImageCapture?
+    permissionLauncher: ActivityResultLauncher<Array<String>>
 ) {
     val navController = rememberNavController()
     MisMatchNavHost(
         navController = navController, activity = activity, viewModel = viewModel,
-        cameraUtility = cameraUtility, permissionLauncher = permissionLauncher, imageCapture = imageCapture )
+        cameraUtility = cameraUtility, permissionLauncher = permissionLauncher)
 }
 
 //@Preview(showBackground = true)

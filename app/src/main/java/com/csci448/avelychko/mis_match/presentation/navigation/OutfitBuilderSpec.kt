@@ -17,8 +17,7 @@ object OutfitBuilderSpec: IScreenSpec {
     override fun Content(
         viewModel: MisMatchViewModel, navController: NavController,
         activity: Activity, cameraUtility: CameraUtility,
-        permissionLauncher: ActivityResultLauncher<Array<String>>,
-        imageCapture: ImageCapture?
+        permissionLauncher: ActivityResultLauncher<Array<String>>
     ) {
         OutfitBuilderView(viewModel) { navController.navigate("home") }
     }

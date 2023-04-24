@@ -22,7 +22,6 @@ sealed interface IScreenSpec {
         viewModel: MisMatchViewModel, navController: NavController,
         activity: Activity,
         cameraUtility: CameraUtility,
-        permissionLauncher: ActivityResultLauncher<Array<String>>,
-        imageCapture: ImageCapture?
+        permissionLauncher: ActivityResultLauncher<Array<String>>
     )
 }

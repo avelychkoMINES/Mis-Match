@@ -31,7 +31,7 @@ import com.csci448.avelychko.mis_match.R
 import java.io.File
 
 @Composable
-fun CameraView(imageCaptureM: ImageCapture?) {
+fun CameraView() {
     val imageCapture = ImageCapture.Builder()
         .build()
     val context = LocalContext.current

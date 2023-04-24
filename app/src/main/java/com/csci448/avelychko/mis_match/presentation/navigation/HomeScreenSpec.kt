@@ -18,8 +18,7 @@ object HomeScreenSpec : IScreenSpec {
         navController: NavController,
         activity: Activity,
         cameraUtility: CameraUtility,
-        permissionLauncher: ActivityResultLauncher<Array<String>>,
-        imageCapture: ImageCapture?
+        permissionLauncher: ActivityResultLauncher<Array<String>>
     ) {
         HomeScreen(viewModel = viewModel,
             onOutfitBuilderClick = {

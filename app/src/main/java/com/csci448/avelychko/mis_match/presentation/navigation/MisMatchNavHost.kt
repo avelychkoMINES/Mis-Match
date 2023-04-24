@@ -16,8 +16,7 @@ fun MisMatchNavHost(
     viewModel: MisMatchViewModel,
     activity: Activity,
     cameraUtility: CameraUtility,
-    permissionLauncher: ActivityResultLauncher<Array<String>>,
-    imageCapture: ImageCapture?
+    permissionLauncher: ActivityResultLauncher<Array<String>>
 ) {
     NavHost( navController = navController, startDestination = IScreenSpec.root ) {
         navigation(IScreenSpec.startDestination, IScreenSpec.root) {
@@ -29,8 +28,7 @@ fun MisMatchNavHost(
                             navController = navController,
                             activity = activity,
                             cameraUtility = cameraUtility,
-                            permissionLauncher = permissionLauncher,
-                            imageCapture = imageCapture
+                            permissionLauncher = permissionLauncher
                         )
                     }
                 }
