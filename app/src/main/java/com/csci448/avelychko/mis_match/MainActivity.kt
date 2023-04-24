@@ -1,8 +1,6 @@
 package com.csci448.avelychko.mis_match
 
-import SimpleCameraPreview
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,18 +11,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.csci448.avelychko.mis_match.data.database.PictureRepo
-import com.csci448.avelychko.mis_match.presentation.HomeScreen
 import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
 import com.csci448.avelychko.mis_match.util.CameraUtility
 import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
+import androidx.camera.core.ImageCapture;
 
 class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
+    private var imageCapture: ImageCapture? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val viewModel = MisMatchViewModel(PictureRepo.topList, PictureRepo.bottomList, PictureRepo.shoesList);
@@ -44,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MisMatchScreen(viewModel, this@MainActivity, cameraUtility, permissionLauncher)
+                    MisMatchScreen(viewModel, this@MainActivity, cameraUtility, permissionLauncher, imageCapture)
 
 //                    HomeScreen(
 //                        viewModel = viewModel,
@@ -66,11 +64,13 @@ fun MisMatchScreen(
     viewModel: MisMatchViewModel,
     activity: Activity,
     cameraUtility: CameraUtility,
-    permissionLauncher: ActivityResultLauncher<Array<String>>
+    permissionLauncher: ActivityResultLauncher<Array<String>>,
+    imageCapture: ImageCapture?
 ) {
     val navController = rememberNavController()
-    MisMatchNavHost(navController = navController, activity = activity, viewModel = viewModel,
-        cameraUtility = cameraUtility, permissionLauncher = permissionLauncher )
+    MisMatchNavHost(
+        navController = navController, activity = activity, viewModel = viewModel,
+        cameraUtility = cameraUtility, permissionLauncher = permissionLauncher, imageCapture = imageCapture )
 }
 
 //@Preview(showBackground = true)

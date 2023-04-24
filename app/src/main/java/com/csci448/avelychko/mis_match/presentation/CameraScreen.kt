@@ -1,7 +1,15 @@
-package com.csci448.avelychko.mis_match
+package com.csci448.avelychko.mis_match.presentation
 
 import SimpleCameraPreview
+import android.content.ContentValues
+import android.content.ContentValues.TAG
+import android.icu.text.SimpleDateFormat
+import android.os.Build
+import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,14 +19,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
+import com.csci448.avelychko.mis_match.R
 
 @Composable
-fun CameraView() {
+fun CameraView(imageCapture: ImageCapture?) {
     val context = LocalContext.current
 
     Box {
@@ -94,6 +104,7 @@ fun CameraView() {
                     ) {
                         IconButton(onClick = {
                             Toast.makeText(context, "Takes a picture", Toast.LENGTH_SHORT).show()
+                            takePhoto(imageCapture)
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.baseline_circle_24),
@@ -108,8 +119,50 @@ fun CameraView() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun CameraPreview() {
-    CameraView()
+private fun takePhoto(imageCapture: ImageCapture?) {
+    // Get a stable reference of the modifiable image capture use case
+    val imageCapture = imageCapture ?: return
+
+    // Create time stamped name and MediaStore entry.
+    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.current)
+        .format(System.currentTimeMillis())
+    val contentValues = ContentValues().apply {
+        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
+        }
+    }
+
+    // Create output options object which contains file + metadata
+    val outputOptions = ImageCapture.OutputFileOptions
+        .Builder(contentResolver,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues)
+        .build()
+
+    // Set up image capture listener, which is triggered after photo has
+    // been taken
+    imageCapture.takePicture(
+        outputOptions,
+        ContextCompat.getMainExecutor(this),
+        object : ImageCapture.OnImageSavedCallback {
+            override fun onError(exc: ImageCaptureException) {
+                Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+            }
+
+            override fun
+                    onImageSaved(output: ImageCapture.OutputFileResults){
+                val msg = "Photo capture succeeded: ${output.savedUri}"
+                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, msg)
+            }
+        }
+    )
 }
+
+//@Preview(showBackground = true)
+//@Composable
+//fun CameraPreview() {
+//    CameraView()
+//}

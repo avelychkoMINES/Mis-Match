@@ -4,6 +4,7 @@ import StyleScreen
 import android.app.Activity
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.camera.core.ImageCapture
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
@@ -15,9 +16,11 @@ object StyleGeneratorSpec: IScreenSpec {
         get() = "style generator"
 
     @Composable
-    override fun Content(viewModel: MisMatchViewModel, navController: NavController,
-                         activity: Activity, cameraUtility: CameraUtility,
-                         permissionLauncher: ActivityResultLauncher<Array<String>>
+    override fun Content(
+        viewModel: MisMatchViewModel, navController: NavController,
+        activity: Activity, cameraUtility: CameraUtility,
+        permissionLauncher: ActivityResultLauncher<Array<String>>,
+        imageCapture: ImageCapture?
     ) {
         var context = LocalContext.current
         StyleScreen(viewModel = viewModel, onStyleClicked = {

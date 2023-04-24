@@ -1,7 +1,7 @@
 package com.csci448.avelychko.mis_match.presentation.navigation
 import android.app.Activity
-import android.content.Context
 import androidx.activity.result.ActivityResultLauncher
+import androidx.camera.core.ImageCapture
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -16,7 +16,8 @@ fun MisMatchNavHost(
     viewModel: MisMatchViewModel,
     activity: Activity,
     cameraUtility: CameraUtility,
-    permissionLauncher: ActivityResultLauncher<Array<String>>
+    permissionLauncher: ActivityResultLauncher<Array<String>>,
+    imageCapture: ImageCapture?
 ) {
     NavHost( navController = navController, startDestination = IScreenSpec.root ) {
         navigation(IScreenSpec.startDestination, IScreenSpec.root) {
@@ -28,7 +29,8 @@ fun MisMatchNavHost(
                             navController = navController,
                             activity = activity,
                             cameraUtility = cameraUtility,
-                            permissionLauncher = permissionLauncher
+                            permissionLauncher = permissionLauncher,
+                            imageCapture = imageCapture
                         )
                     }
                 }
