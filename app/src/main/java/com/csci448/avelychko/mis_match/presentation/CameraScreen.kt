@@ -124,6 +124,9 @@ fun CameraView() {
     }
 }
 
+// links:
+// https://developer.android.com/guide/topics/providers/content-provider-basics
+// https://developer.android.com/reference/android/provider/MediaStore.Images.Media
 private fun takePhoto(imageCapture: ImageCapture?, context: Context) {
     Log.d(TAG, "takephoto() called")
 
@@ -134,23 +137,23 @@ private fun takePhoto(imageCapture: ImageCapture?, context: Context) {
 //    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.current)
 //        .format(System.currentTimeMillis())
     val contentValues = ContentValues()
-//        .apply {
+//        .apply {                                                              // TODO: uncomment this
 //        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
 //        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
 //        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-//            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
+//            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image") // maybe absolute path
 //        }
 //    }
     Log.d(TAG, "contentValues: $contentValues")
 
-    // Create output options object which contains file + metadata
+    // Create output options object which contains file + metadata      // TODO: We need this back
 //    val outputOptions = ImageCapture.OutputFileOptions
 //        .Builder(contentResolver,
-//            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,         // INTERNAL_CONTENT_URI
 //            contentValues)
 //        .build()
 
-    val file = File("com.csci448.avelychko.mis_match")
+    val file = File("com.csci448.avelychko.mis_match")      // data/data/ - probably don't need to make a file any more
     val outputOptions = ImageCapture.OutputFileOptions
         .Builder(context.contentResolver,
             Uri.fromFile(file),
