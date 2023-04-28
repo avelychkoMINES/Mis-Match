@@ -117,6 +117,8 @@ fun CameraView() {
 // https://developer.android.com/guide/topics/providers/content-provider-basics
 // https://developer.android.com/reference/android/provider/MediaStore.Images.Media
 private fun takePhoto(imageCapture: ImageCapture?, context: Context) {
+    private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+    
     Log.d(TAG, "takephoto() called")
 
     // Get a stable reference of the modifiable image capture use case
