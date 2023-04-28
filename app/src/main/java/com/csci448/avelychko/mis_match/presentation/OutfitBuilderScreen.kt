@@ -136,7 +136,8 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
 
         Row(modifier = Modifier
             .fillMaxWidth()
-            .background(color = Color(red = 225, green = 208, blue = 191))) {
+            .background(color = Color(red = 225, green = 208, blue = 191)),
+        ) {
             IconButton(modifier = Modifier.padding(5.dp),
                 onClick = {
                     Toast.makeText(context, "Adds to saved outfits", Toast.LENGTH_SHORT).show()
@@ -146,6 +147,9 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                     contentDescription = "",
                     tint = Color.Red
                 )
+            }
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Randomize Outfit")
             }
         }
     }

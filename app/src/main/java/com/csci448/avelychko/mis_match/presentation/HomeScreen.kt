@@ -82,7 +82,7 @@ fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp, vertical = 30.dp)
                 ) {
-                    Text("Style Generator",
+                    Text("Outfit Generator",
                         fontSize = 24.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.Serif,

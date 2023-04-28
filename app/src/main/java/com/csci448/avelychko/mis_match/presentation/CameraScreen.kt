@@ -58,17 +58,6 @@ fun CameraView() {
                             .padding(10.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "Avatar",
-                            color = Color.White,
-                            fontSize = 24.sp,
-                            modifier = Modifier.clickable {
-                                Toast.makeText(
-                                    context,
-                                    "Taking avatar pic",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                            });
                         Text(text = "Tops",
                             color = Color.White,
                             fontSize = 24.sp,
@@ -134,11 +123,12 @@ private fun takePhoto(imageCapture: ImageCapture?, context: Context) {
     val imageCapture = imageCapture ?: return
 
     // Create time stamped name and MediaStore entry.
-//    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.current)
+
+    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.current)
 //        .format(System.currentTimeMillis())
     val contentValues = ContentValues()
         .apply {                                                              // TODO: uncomment this
-        put(MediaStore.MediaColumns.DISPLAY_NAME, "name")
+        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
         put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
             put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image") // maybe absolute path
@@ -149,7 +139,7 @@ private fun takePhoto(imageCapture: ImageCapture?, context: Context) {
     // Create output options object which contains file + metadata      // TODO: We need this back
     val outputOptions = ImageCapture.OutputFileOptions
         .Builder(context.contentResolver,
-            MediaStore.Images.Media.INTERNAL_CONTENT_URI,         // INTERNAL_CONTENT_URI
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,         // INTERNAL_CONTENT_URI
             contentValues)
         .build()
 

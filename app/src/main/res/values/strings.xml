@@ -26,4 +26,7 @@
     <string name="name_villian_dean_hardscrabble">Dean Dr. Abigal Hardscrabble</string>
     <string name="description_villian_dean_hardscrabble">Legendary Scarer and Dean of the School of Scaring at Monsters University</string>
 
+    <String name="TopFolder">Pictures/CameraX-Image/Top</String>
+    <String name="Bottom/Folder">Pictures/CameraX-Image/Bottom</String>
+    <String name="Shoes/Folder">Pictures/CameraX-Image/Shoes</String>
 </resources>

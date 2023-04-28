@@ -45,39 +45,7 @@ fun StyleScreen (viewModel: MisMatchViewModel, onStyleClicked: (String) -> Unit,
                 .fillMaxWidth()
                 .background(color = Color(red = 225, green = 208, blue = 191)),
         ) {
-            Row() {
-                val styles = listOf("Sporty", "Preppy", "Casual")
-                val isExpanded = remember { mutableStateOf(false) }
-                val selectedStyle = remember { mutableStateOf(styles[0]) }
 
-                ExposedDropdownMenuBox(expanded = isExpanded.value, onExpandedChange = {
-                    Toast
-                        .makeText(currentContext,
-                            "Change Style",
-                            Toast.LENGTH_SHORT)
-                        .show()
-                    isExpanded.value = !isExpanded.value}) {
-                    TextField(selectedStyle.value,
-                        onValueChange = {}, readOnly = true, trailingIcon = {
-                            ExposedDropdownMenuDefaults.TrailingIcon(
-                                expanded = isExpanded.value
-                            )
-                        })
-                    ExposedDropdownMenu(expanded = isExpanded.value,
-                        onDismissRequest = { isExpanded.value = false }) {
-                        styles.forEach{ selection -> DropdownMenuItem(
-                            text= {Text(selection)},
-                            onClick = {
-//                                selectedStyle.value = selection
-//                                isExpanded.value = false
-                                onStyleClicked(selection)
-                            },
-
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
 }
