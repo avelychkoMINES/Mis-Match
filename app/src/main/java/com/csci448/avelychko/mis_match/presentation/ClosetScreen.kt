@@ -1,9 +1,11 @@
 package com.csci448.avelychko.mis_match.presentation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,7 +47,14 @@ fun ClosetView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Tops",
                         fontSize = 24.sp)
-                    //LazyRow(content = { items(viewModel.topList) { item -> } })
+                    LazyRow(content = { items(viewModel.topList) { item ->
+                        Image(
+                            painter = painterResource(
+                                id = item.imageId
+                            ),
+                            contentDescription = ""
+                        )
+                    } })
 //                    Row(modifier = Modifier
 //                        .padding(10.dp),
 //                    ) {
@@ -58,7 +67,14 @@ fun ClosetView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Bottoms",
                         fontSize = 24.sp)
-                    LazyRow(content = { viewModel.bottomList })
+                    LazyRow(content = { items(viewModel.bottomList) { item ->
+                        Image(
+                            painter = painterResource(
+                                id = item.imageId
+                            ),
+                            contentDescription = ""
+                        )
+                    } })
 //                    Row(modifier = Modifier
 //                        .padding(10.dp)
 //                        .fillMaxWidth()) {
@@ -71,7 +87,14 @@ fun ClosetView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Shoes",
                         fontSize = 24.sp)
-                    LazyRow(content = { viewModel.shoeList })
+                    LazyRow(content = { items(viewModel.shoeList) { item ->
+                        Image(
+                            painter = painterResource(
+                                id = item.imageId
+                            ),
+                            contentDescription = ""
+                        )
+                    } })
 //                    Row(modifier = Modifier
 //                        .padding(10.dp)) {
 //                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")

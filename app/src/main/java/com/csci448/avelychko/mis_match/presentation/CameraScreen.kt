@@ -137,28 +137,23 @@ private fun takePhoto(imageCapture: ImageCapture?, context: Context) {
 //    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.current)
 //        .format(System.currentTimeMillis())
     val contentValues = ContentValues()
-//        .apply {                                                              // TODO: uncomment this
-//        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-//        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-//            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image") // maybe absolute path
-//        }
-//    }
+        .apply {                                                              // TODO: uncomment this
+        put(MediaStore.MediaColumns.DISPLAY_NAME, "name")
+        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image") // maybe absolute path
+        }
+    }
     Log.d(TAG, "contentValues: $contentValues")
 
     // Create output options object which contains file + metadata      // TODO: We need this back
-//    val outputOptions = ImageCapture.OutputFileOptions
-//        .Builder(contentResolver,
-//            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,         // INTERNAL_CONTENT_URI
-//            contentValues)
-//        .build()
-
-    val file = File("com.csci448.avelychko.mis_match")      // data/data/ - probably don't need to make a file any more
     val outputOptions = ImageCapture.OutputFileOptions
         .Builder(context.contentResolver,
-            Uri.fromFile(file),
+            MediaStore.Images.Media.INTERNAL_CONTENT_URI,         // INTERNAL_CONTENT_URI
             contentValues)
         .build()
+
+    // data/data/ - probably don't need to make a file any more
     Log.d(TAG, "outputoptions: $outputOptions")
 
     // Set up image capture listener, which is triggered after photo has
