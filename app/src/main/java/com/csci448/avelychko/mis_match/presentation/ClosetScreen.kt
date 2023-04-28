@@ -18,12 +18,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.csci448.avelychko.mis_match.presentation.ImageDisplay
-import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ClosetView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
+fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
     //clothes: List<Clothes>
     Column(modifier = Modifier.fillMaxSize()) {
         CenterAlignedTopAppBar(title = {
@@ -47,67 +48,29 @@ fun ClosetView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Tops",
                         fontSize = 24.sp)
-                    LazyRow(content = { items(viewModel.topList) { item ->
-                        Image(
-                            painter = painterResource(
-                                id = item.imageId
-                            ),
-                            contentDescription = ""
-                        )
+                    LazyRow(content = { items(viewModel.getTopPhoto()) { item ->
+                        AsyncImage(model = "Picture/CameraX-Image/Top/" + item.photographFileName, contentDescription = "")
                     } })
-//                    Row(modifier = Modifier
-//                        .padding(10.dp),
-//                    ) {
-//                        //items(clothes) { Image(painter = it)}
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                    }
                 }
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Bottoms",
                         fontSize = 24.sp)
-                    LazyRow(content = { items(viewModel.bottomList) { item ->
-                        Image(
-                            painter = painterResource(
-                                id = item.imageId
-                            ),
-                            contentDescription = ""
-                        )
+                    LazyRow(content = { items(viewModel.getBottomPhoto()) { item ->
+                        AsyncImage(model = "Picture/CameraX-Image/Bottom/" + item.photographFileName, contentDescription = "")
                     } })
-//                    Row(modifier = Modifier
-//                        .padding(10.dp)
-//                        .fillMaxWidth()) {
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                    }
                 }
 
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Shoes",
                         fontSize = 24.sp)
-                    LazyRow(content = { items(viewModel.shoeList) { item ->
-                        Image(
-                            painter = painterResource(
-                                id = item.imageId
-                            ),
-                            contentDescription = ""
-                        )
+                    LazyRow(content = { items(viewModel.getShoePhoto()) { item ->
+                        AsyncImage(model = "Picture/CameraX-Image/Shoe/" + item.photographFileName, contentDescription = "")
                     } })
-//                    Row(modifier = Modifier
-//                        .padding(10.dp)) {
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                        Icon(painter = painterResource(id = R.drawable.baseline_circle_25), contentDescription = "")
-//                    }
                 }
 
             }
 
         }
-
-
     }
 }
 

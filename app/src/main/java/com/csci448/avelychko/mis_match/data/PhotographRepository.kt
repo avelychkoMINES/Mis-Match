@@ -34,6 +34,21 @@ private constructor(private val photographDao: PhotographDao,
         }
     }
 
+    val top: List<Photograph>
+    val bottom: List<Photograph>
+    val shoe: List<Photograph>
+
+    init {
+        val topList = mutableListOf<Photograph>()
+        top = topList.toList()
+
+        val bottomList = mutableListOf<Photograph>()
+        bottom = bottomList.toList()
+
+        val shoeList = mutableListOf<Photograph>()
+        shoe = shoeList.toList()
+    }
+
     fun getPhotographs() = photographDao.getPhotographs()
 
     suspend fun getPhotograph(id: UUID) = photographDao.getPhotograph(id)

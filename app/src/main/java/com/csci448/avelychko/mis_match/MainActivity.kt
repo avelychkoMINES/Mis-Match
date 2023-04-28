@@ -1,7 +1,6 @@
 package com.csci448.avelychko.mis_match
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,21 +12,24 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.csci448.avelychko.mis_match.data.database.PictureRepo
-import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
 import com.csci448.avelychko.mis_match.util.CameraUtility
 import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
-import androidx.camera.core.ImageCapture;
+import androidx.lifecycle.ViewModelProvider
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModelFactory
 
 class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
+    private lateinit var viewModel: PhotographViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val viewModel = MisMatchViewModel(PictureRepo.topList, PictureRepo.bottomList, PictureRepo.shoesList);
         super.onCreate(savedInstanceState)
-        
+
+        val factory = PhotographViewModelFactory(this)
+        viewModel = ViewModelProvider(this, factory) [factory.getViewModelClass()]
+
         permissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
                 // process if permissions were granted
@@ -61,7 +63,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MisMatchScreen(
-    viewModel: MisMatchViewModel,
+    viewModel: PhotographViewModel,
     activity: Activity,
     cameraUtility: CameraUtility,
     permissionLauncher: ActivityResultLauncher<Array<String>>

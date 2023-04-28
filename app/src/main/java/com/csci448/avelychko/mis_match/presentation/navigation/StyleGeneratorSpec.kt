@@ -8,7 +8,7 @@ import androidx.camera.core.ImageCapture
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
-import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import com.csci448.avelychko.mis_match.util.CameraUtility
 
 object StyleGeneratorSpec: IScreenSpec {
@@ -17,7 +17,7 @@ object StyleGeneratorSpec: IScreenSpec {
 
     @Composable
     override fun Content(
-        viewModel: MisMatchViewModel, navController: NavController,
+        viewModel: PhotographViewModel, navController: NavController,
         activity: Activity, cameraUtility: CameraUtility,
         permissionLauncher: ActivityResultLauncher<Array<String>>
     ) {

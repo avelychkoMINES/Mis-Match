@@ -9,9 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,11 +17,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.csci448.avelychko.mis_match.R
-import com.csci448.avelychko.mis_match.presentation.viewmodel.MisMatchViewModel
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen (viewModel : MisMatchViewModel, onOutfitBuilderClick: () -> Unit,
+fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Unit,
                 onSavedOutfitsClick: () -> Unit, onStyleGeneratorClick: () -> Unit,
                 onClosetClick: () -> Unit, onCameraClick: () -> Unit) {
 
