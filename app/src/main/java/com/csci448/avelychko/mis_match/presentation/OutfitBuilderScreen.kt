@@ -136,7 +136,9 @@ fun OutfitBuilderView(viewModel: MisMatchViewModel, onLogoClicked: () -> Unit) {
 
         Row(modifier = Modifier
             .fillMaxWidth()
+            .padding(5.dp)
             .background(color = Color(red = 225, green = 208, blue = 191)),
+            Arrangement.SpaceBetween
         ) {
             IconButton(modifier = Modifier.padding(5.dp),
                 onClick = {

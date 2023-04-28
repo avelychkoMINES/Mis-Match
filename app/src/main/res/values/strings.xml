@@ -25,8 +25,4 @@
     <string name="description_monster_terri_terry">Members of Oozma Kappa, Terri is a Dance Major while Terry is an English major</string>
     <string name="name_villian_dean_hardscrabble">Dean Dr. Abigal Hardscrabble</string>
     <string name="description_villian_dean_hardscrabble">Legendary Scarer and Dean of the School of Scaring at Monsters University</string>
-
-    <String name="TopFolder">Pictures/CameraX-Image/Top</String>
-    <String name="Bottom/Folder">Pictures/CameraX-Image/Bottom</String>
-    <String name="Shoes/Folder">Pictures/CameraX-Image/Shoes</String>
 </resources>

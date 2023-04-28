@@ -4,7 +4,6 @@ import SimpleCameraPreview
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
@@ -19,22 +18,28 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.csci448.avelychko.mis_match.R
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun CameraView() {
     val imageCapture = ImageCapture.Builder()
         .build()
     val context = LocalContext.current
+    var folder = remember {
+        ""
+    }
 
     Box {
         SimpleCameraPreview(imageCapture)
@@ -47,7 +52,8 @@ fun CameraView() {
 
             }
             Box(
-                modifier = Modifier.weight(0.2f)
+                modifier = Modifier
+                    .weight(0.2f)
 
                     .background(Color.Black)
             ) {
@@ -68,6 +74,7 @@ fun CameraView() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
+                                folder = "Pictures/CameraX-Image/Tops"
                             });
                         Text(text = "Bottoms",
                             color = Color.White,
@@ -79,6 +86,7 @@ fun CameraView() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
+                                folder = "Pictures/CameraX-Image/Bottoms"
                             });
                         Text(text = "Shoes",
                             color = Color.White,
@@ -90,6 +98,7 @@ fun CameraView() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
+                                folder = "Pictures/CameraX-Image/Shoes"
                             });
                     }
                     Row(
@@ -98,7 +107,7 @@ fun CameraView() {
                     ) {
                         IconButton(onClick = {
                             //Toast.makeText(context, "Takes a picture", Toast.LENGTH_SHORT).show()
-                            takePhoto(imageCapture, context)
+                            takePhoto(imageCapture, context, folder)
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.baseline_circle_24),
@@ -116,24 +125,22 @@ fun CameraView() {
 // links:
 // https://developer.android.com/guide/topics/providers/content-provider-basics
 // https://developer.android.com/reference/android/provider/MediaStore.Images.Media
-private fun takePhoto(imageCapture: ImageCapture?, context: Context) {
-    private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-    
+private fun takePhoto(imageCapture: ImageCapture?, context: Context, folder: String) {
     Log.d(TAG, "takephoto() called")
 
     // Get a stable reference of the modifiable image capture use case
     val imageCapture = imageCapture ?: return
 
     // Create time stamped name and MediaStore entry.
-
-    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.current)
-//        .format(System.currentTimeMillis())
+    val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+    val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
+        .format(System.currentTimeMillis())
     val contentValues = ContentValues()
-        .apply {                                                              // TODO: uncomment this
+        .apply {
         put(MediaStore.MediaColumns.DISPLAY_NAME, name)
         put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image") // maybe absolute path
+            put(MediaStore.Images.Media.RELATIVE_PATH, folder) // maybe absolute path
         }
     }
     Log.d(TAG, "contentValues: $contentValues")
