@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
+import android.util.LogPrinter
 import com.csci448.avelychko.mis_match.data.database.PhotographDao
 import com.csci448.avelychko.mis_match.data.database.PhotographDatabase
 import kotlinx.coroutines.CoroutineScope
@@ -47,23 +48,35 @@ private constructor(private val photographDao: PhotographDao,
                 else MediaStore.Images.Media.DATA + " like ? "
 
                 val selectionArgsTop = arrayOf("Picture/CameraX-Image/Top/")
-
                 val selectionArgsBottom = arrayOf("Picture/CameraX-Image/Bottom/")
-
                 val selectionArgsShoe = arrayOf("Picture/CameraX-Image/Shoe/")
+
+                Log.d(LOG_TAG, "cursor start")
+                Log.d(LOG_TAG, "selection $selection")
+                Log.d(LOG_TAG, "media ${MediaStore.Images.Media.EXTERNAL_CONTENT_URI}")
 
                 val cursorTop = context.contentResolver.query(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         null,
-                        selection,
-                        selectionArgsTop,
+                        //selection,
+                        //selectionArgsTop,
+                    null,
+                    selectionArgsTop,
                         null)
                 if (cursorTop != null) {
+                    Log.d(LOG_TAG, "cursor not null")
+                    Log.d(LOG_TAG, "cursorTop $cursorTop")
+
+                    Log.d(LOG_TAG, "cursorcount ${cursorTop.count}")
                     while(cursorTop.moveToNext()) {
+                        Log.d(LOG_TAG, "cursorTop $cursorTop")
                         val absolutePathOfImage = cursorTop.getString(cursorTop.getColumnIndexOrThrow(
                             MediaStore.MediaColumns.DATA))
-                        top.add(Photograph(absolutePathOfImage))
+                        Log.d(LOG_TAG, "absolutepath $absolutePathOfImage")
 
+                        if (absolutePathOfImage.contains("top")) {
+                            top.add(Photograph(absolutePathOfImage))
+                        }
                     }
                 }
 
