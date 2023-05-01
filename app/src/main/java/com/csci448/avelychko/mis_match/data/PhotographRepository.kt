@@ -1,6 +1,8 @@
 package com.csci448.avelychko.mis_match.data
 
 import android.content.Context
+import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
 import com.csci448.avelychko.mis_match.data.database.PhotographDao
 import com.csci448.avelychko.mis_match.data.database.PhotographDatabase
@@ -19,6 +21,15 @@ private constructor(private val photographDao: PhotographDao,
 
         @Volatile private var INSTANCE: PhotographRepository? = null
 
+        val top: MutableList<Photograph> = mutableListOf()
+        //top = topList.toList()
+
+        val bottom: MutableList<Photograph> = mutableListOf()
+        //bottom = bottomList.toList()
+
+        val shoe: MutableList<Photograph> = mutableListOf()
+        //shoe = shoeList.toList()
+
         fun getInstance(context: Context): PhotographRepository {
             synchronized(this) {
                 Log.d(LOG_TAG, "getInstance(Context) called")
@@ -29,38 +40,76 @@ private constructor(private val photographDao: PhotographDao,
                     instance = PhotographRepository( database.photographDao )
                     INSTANCE = instance
                 }
-                val DIRECTORY_NAME = "%your_folder_name%"
+                //val DIRECTORY_NAME = "%your_folder_name%"
 
                 val selection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
                     MediaStore.MediaColumns.RELATIVE_PATH + " like ? "
                 else MediaStore.Images.Media.DATA + " like ? "
 
-                val selectionArgs = arrayOf(APP_RESOURCE_DIRECTORY_NAME)
+                val selectionArgsTop = arrayOf("Picture/CameraX-Image/Top/")
 
-                val cursor = context.contentResolver.query(
+                val selectionArgsBottom = arrayOf("Picture/CameraX-Image/Bottom/")
+
+                val selectionArgsShoe = arrayOf("Picture/CameraX-Image/Shoe/")
+
+                val cursorTop = context.contentResolver.query(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         null,
                         selection,
-                        selectionArgs,
+                        selectionArgsTop,
                         null)
+                if (cursorTop != null) {
+                    while(cursorTop.moveToNext()) {
+                        val absolutePathOfImage = cursorTop.getString(cursorTop.getColumnIndexOrThrow(
+                            MediaStore.MediaColumns.DATA))
+                        top.add(Photograph(absolutePathOfImage))
+
+                    }
+                }
+
+                val cursorBottom = context.contentResolver.query(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    null,
+                    selection,
+                    selectionArgsBottom,
+                    null)
+                if (cursorBottom != null) {
+                    while(cursorBottom.moveToNext()) {
+                        val absolutePathOfImage = cursorBottom.getString(cursorBottom.getColumnIndexOrThrow(
+                            MediaStore.MediaColumns.DATA))
+                        bottom.add(Photograph(absolutePathOfImage))
+                    }
+                }
+
+                val cursorShoe = context.contentResolver.query(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    null,
+                    selection,
+                    selectionArgsShoe,
+                    null)
+                if (cursorShoe != null) {
+                    while(cursorShoe.moveToNext()) {
+                        val absolutePathOfImage = cursorShoe.getString(cursorShoe.getColumnIndexOrThrow(
+                            MediaStore.MediaColumns.DATA))
+                        shoe.add(Photograph(absolutePathOfImage))
+                    }
+                }
                 return instance
             }
         }
     }
 
-    val top: List<Photograph>
-    val bottom: List<Photograph>
-    val shoe: List<Photograph>
+
 
     init {
-        val topList = mutableListOf<Photograph>()
-        top = topList.toList()
-
-        val bottomList = mutableListOf<Photograph>()
-        bottom = bottomList.toList()
-
-        val shoeList = mutableListOf<Photograph>()
-        shoe = shoeList.toList()
+//        val topList = mutableListOf<Photograph>()
+//        top = topList.toList()
+//
+//        val bottomList = mutableListOf<Photograph>()
+//        bottom = bottomList.toList()
+//
+//        val shoeList = mutableListOf<Photograph>()
+//        shoe = shoeList.toList()
     }
 
     fun getPhotographs() = photographDao.getPhotographs()
@@ -77,5 +126,17 @@ private constructor(private val photographDao: PhotographDao,
         coroutineScope.launch {
             photographDao.deletePhotograph(photograph)
         }
+    }
+
+    fun getTopPhoto(): MutableList<Photograph> {
+        return top
+    }
+
+    fun getBottomPhoto(): List<Photograph> {
+        return bottom
+    }
+
+    fun getShoePhoto(): List<Photograph> {
+        return shoe
     }
 }

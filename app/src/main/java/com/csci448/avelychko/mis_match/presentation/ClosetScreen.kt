@@ -25,7 +25,6 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewMode
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
-    //clothes: List<Clothes>
     Column(modifier = Modifier.fillMaxSize()) {
         CenterAlignedTopAppBar(title = {
             Text("Mis-Match!",
@@ -49,14 +48,14 @@ fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
                     Text(text = "Tops",
                         fontSize = 24.sp)
                     LazyRow(content = { items(viewModel.getTopPhoto()) { item ->
-                        AsyncImage(model = "Picture/CameraX-Image/Top/" + item.photographFileName, contentDescription = "")
+                        AsyncImage(model = item.photographFileName, contentDescription = "")
                     } })
                 }
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Bottoms",
                         fontSize = 24.sp)
                     LazyRow(content = { items(viewModel.getBottomPhoto()) { item ->
-                        AsyncImage(model = "Picture/CameraX-Image/Bottom/" + item.photographFileName, contentDescription = "")
+                        AsyncImage(model = item.photographFileName, contentDescription = "")
                     } })
                 }
 
@@ -64,7 +63,7 @@ fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
                     Text(text = "Shoes",
                         fontSize = 24.sp)
                     LazyRow(content = { items(viewModel.getShoePhoto()) { item ->
-                        AsyncImage(model = "Picture/CameraX-Image/Shoe/" + item.photographFileName, contentDescription = "")
+                        AsyncImage(model = item.photographFileName, contentDescription = "")
                     } })
                 }
 
