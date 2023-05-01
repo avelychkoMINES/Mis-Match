@@ -29,6 +29,20 @@ private constructor(private val photographDao: PhotographDao,
                     instance = PhotographRepository( database.photographDao )
                     INSTANCE = instance
                 }
+                val DIRECTORY_NAME = "%your_folder_name%"
+
+                val selection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                    MediaStore.MediaColumns.RELATIVE_PATH + " like ? "
+                else MediaStore.Images.Media.DATA + " like ? "
+
+                val selectionArgs = arrayOf(APP_RESOURCE_DIRECTORY_NAME)
+
+                val cursor = context.contentResolver.query(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        null,
+                        selection,
+                        selectionArgs,
+                        null)
                 return instance
             }
         }
