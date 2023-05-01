@@ -25,10 +25,12 @@ object HomeScreenSpec : IScreenSpec {
         }, onSavedOutfitsClick =
         {
             navController.navigate("saved outfits")
-        }, onStyleGeneratorClick =
+        },
+            onStyleGeneratorClick =
         {
             navController.navigate("style generator")
-        }, onClosetClick =
+        },
+            onClosetClick =
         {
             navController.navigate("closet")
         },

@@ -45,16 +45,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     MisMatchScreen(viewModel, this@MainActivity, cameraUtility, permissionLauncher)
-
-//                    HomeScreen(
-//                        viewModel = viewModel,
-//                        onOutfitBuilderClick = { /*TODO*/ },
-//                        onSavedOutfitsClick = { /*TODO*/ },
-//                        onStyleGeneratorClick = { /*TODO*/ },
-//                        onClosetClick = { /*TODO*/ },
-//                        ) {
-//                        cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
-//                    }
                 }
             }
         }

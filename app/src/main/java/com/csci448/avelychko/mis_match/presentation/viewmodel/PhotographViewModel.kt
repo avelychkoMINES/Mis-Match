@@ -72,6 +72,8 @@
 package com.csci448.avelychko.mis_match.presentation.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csci448.avelychko.mis_match.data.Photograph
@@ -85,6 +87,13 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
     companion object {
         private const val LOG_TAG = "448.PhotographViewModel"
     }
+
+    val selectedTopState: MutableState<Photograph?> = mutableStateOf(null);
+    val selectedBottomState: MutableState<Photograph?> = mutableStateOf(null);
+    val selectedShoeState: MutableState<Photograph?> = mutableStateOf(null);
+    var indexTop: Int = 0;
+    var indexBottom: Int = 0;
+    var indexShoe: Int = 0;
 
     private val mPhotographListStateFlow: MutableStateFlow<List<Photograph>> = MutableStateFlow(emptyList())
     val photographListStateFlow: StateFlow<List<Photograph>>
@@ -147,5 +156,53 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
 
     fun getShoePhoto(): List<Photograph> {
         return photographRepository.shoe
+    }
+
+    fun moveToNextTop() {
+        indexTop++
+        if (indexTop >= topList.size) {
+            indexTop = 0
+        }
+        selectedTopState.value = topList[indexTop]
+    }
+
+    fun moveToNextBottom() {
+        indexBottom++
+        if (indexBottom >= bottomList.size) {
+            indexBottom = 0
+        }
+        selectedBottomState.value = bottomList[indexBottom]
+    }
+
+    fun moveToNextShoe() {
+        indexShoe++
+        if (indexShoe >= shoeList.size) {
+            indexShoe = 0
+        }
+        selectedShoeState.value = shoeList[indexShoe]
+    }
+
+    fun moveToPrevTop() {
+        indexTop--
+        if (indexTop < 0) {
+            indexTop = topList.size - 1
+        }
+        selectedTopState.value = topList[indexTop]
+    }
+
+    fun moveToPrevBottom() {
+        indexBottom--
+        if (indexBottom < 0) {
+            indexBottom = bottomList.size - 1
+        }
+        selectedBottomState.value = bottomList[indexBottom]
+    }
+
+    fun moveToPrevShoe() {
+        indexShoe--
+        if (indexShoe < 0) {
+            indexShoe = shoeList.size - 1
+        }
+        selectedShoeState.value = shoeList[indexShoe]
     }
 }

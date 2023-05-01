@@ -140,15 +140,15 @@ private fun takePhoto(imageCapture: ImageCapture?, context: Context, folder: Str
         put(MediaStore.MediaColumns.DISPLAY_NAME, name)
         put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            put(MediaStore.Images.Media.RELATIVE_PATH, folder) // maybe absolute path
+            put(MediaStore.Images.Media.RELATIVE_PATH, folder)
         }
     }
     Log.d(TAG, "contentValues: $contentValues")
 
-    // Create output options object which contains file + metadata      // TODO: We need this back
+    // Create output options object which contains file + metadata
     val outputOptions = ImageCapture.OutputFileOptions
         .Builder(context.contentResolver,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,         // INTERNAL_CONTENT_URI
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             contentValues)
         .build()
 

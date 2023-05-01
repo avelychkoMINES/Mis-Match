@@ -18,6 +18,10 @@ object OutfitBuilderSpec: IScreenSpec {
         activity: Activity, cameraUtility: CameraUtility,
         permissionLauncher: ActivityResultLauncher<Array<String>>
     ) {
-        OutfitBuilderView(viewModel) { navController.navigate("home") }
+        OutfitBuilderView(viewModel, onLogoClicked = { navController.navigate("home")}) {
+            viewModel.selectedTopState.value = viewModel.getTopPhoto().random()
+            viewModel.selectedBottomState.value = viewModel.getBottomPhoto().random()
+            viewModel.selectedShoeState.value = viewModel.getShoePhoto().random()
+        }
     }
 }
