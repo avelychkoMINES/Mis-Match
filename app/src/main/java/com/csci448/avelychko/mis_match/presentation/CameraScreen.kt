@@ -4,7 +4,6 @@ import SimpleCameraPreview
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
@@ -24,11 +23,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.csci448.avelychko.mis_match.R
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,7 +34,7 @@ fun CameraView() {
     val imageCapture = ImageCapture.Builder()
         .build()
     val context = LocalContext.current
-    var folder = remember {
+    var type = remember {
         ""
     }
 
@@ -74,7 +71,7 @@ fun CameraView() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
-                                folder = "Pictures/CameraX-Image/Tops"
+                                type = "Tops-"
                             });
                         Text(text = "Bottoms",
                             color = Color.White,
@@ -86,7 +83,7 @@ fun CameraView() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
-                                folder = "Pictures/CameraX-Image/Bottoms"
+                                type = "Bottoms-"
                             });
                         Text(text = "Shoes",
                             color = Color.White,
@@ -98,7 +95,7 @@ fun CameraView() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
-                                folder = "Pictures/CameraX-Image/Shoes"
+                                type = "Shoes-"
                             });
                     }
                     Row(
@@ -107,7 +104,7 @@ fun CameraView() {
                     ) {
                         IconButton(onClick = {
                             //Toast.makeText(context, "Takes a picture", Toast.LENGTH_SHORT).show()
-                            takePhoto(imageCapture, context, folder)
+                            takePhoto(imageCapture, context, type)
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.baseline_circle_24),
@@ -125,7 +122,7 @@ fun CameraView() {
 // links:
 // https://developer.android.com/guide/topics/providers/content-provider-basics
 // https://developer.android.com/reference/android/provider/MediaStore.Images.Media
-private fun takePhoto(imageCapture: ImageCapture?, context: Context, folder: String) {
+private fun takePhoto(imageCapture: ImageCapture?, context: Context, type: String) {
     Log.d(TAG, "takephoto() called")
 
     // Get a stable reference of the modifiable image capture use case
@@ -137,10 +134,10 @@ private fun takePhoto(imageCapture: ImageCapture?, context: Context, folder: Str
         .format(System.currentTimeMillis())
     val contentValues = ContentValues()
         .apply {
-        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+        put(MediaStore.MediaColumns.DISPLAY_NAME, type + name)
         put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            put(MediaStore.Images.Media.RELATIVE_PATH, folder)
+            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image/")
         }
     }
     Log.d(TAG, "contentValues: $contentValues")

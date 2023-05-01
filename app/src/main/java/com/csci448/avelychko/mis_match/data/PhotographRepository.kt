@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
-import android.util.LogPrinter
 import com.csci448.avelychko.mis_match.data.database.PhotographDao
 import com.csci448.avelychko.mis_match.data.database.PhotographDatabase
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +19,8 @@ private constructor(private val photographDao: PhotographDao,
     companion object {
         private const val LOG_TAG = "448.PhotographRepository"
 
-        @Volatile private var INSTANCE: PhotographRepository? = null
+        @Volatile
+        private var INSTANCE: PhotographRepository? = null
 
         val top: MutableList<Photograph> = mutableListOf()
         //top = topList.toList()
@@ -38,7 +38,7 @@ private constructor(private val photographDao: PhotographDao,
                 if (instance == null) {
                     Log.d(LOG_TAG, "creating PhotographRepository instance")
                     val database = PhotographDatabase.getInstance(context)
-                    instance = PhotographRepository( database.photographDao )
+                    instance = PhotographRepository(database.photographDao)
                     INSTANCE = instance
                 }
                 //val DIRECTORY_NAME = "%your_folder_name%"
@@ -55,62 +55,42 @@ private constructor(private val photographDao: PhotographDao,
                 Log.d(LOG_TAG, "selection $selection")
                 Log.d(LOG_TAG, "media ${MediaStore.Images.Media.EXTERNAL_CONTENT_URI}")
 
-                val cursorTop = context.contentResolver.query(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        null,
-                        //selection,
-                        //selectionArgsTop,
+                val cursor = context.contentResolver.query(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                     null,
-                    selectionArgsTop,
-                        null)
-                if (cursorTop != null) {
+                    //selection,
+                    //selectionArgsTop,
+                    null,
+                    null,
+                    null
+                )
+                if (cursor != null) {
                     Log.d(LOG_TAG, "cursor not null")
-                    Log.d(LOG_TAG, "cursorTop $cursorTop")
+                    Log.d(LOG_TAG, "cursorTop $cursor")
 
-                    Log.d(LOG_TAG, "cursorcount ${cursorTop.count}")
-                    while(cursorTop.moveToNext()) {
-                        Log.d(LOG_TAG, "cursorTop $cursorTop")
-                        val absolutePathOfImage = cursorTop.getString(cursorTop.getColumnIndexOrThrow(
-                            MediaStore.MediaColumns.DATA))
+                    Log.d(LOG_TAG, "cursorcount ${cursor.count}")
+                    while (cursor.moveToNext()) {
+                        Log.d(LOG_TAG, "cursorTop $cursor")
+                        val absolutePathOfImage = cursor.getString(
+                            cursor.getColumnIndexOrThrow(
+                                MediaStore.MediaColumns.DATA
+                            )
+                        )
                         Log.d(LOG_TAG, "absolutepath $absolutePathOfImage")
 
-                        if (absolutePathOfImage.contains("top")) {
+                        if (absolutePathOfImage.contains("Tops")) {
                             top.add(Photograph(absolutePathOfImage))
+                        } else if (absolutePathOfImage.contains("Bottoms")) {
+                            bottom.add(Photograph(absolutePathOfImage))
+                        } else if (absolutePathOfImage.contains("Shoes")) {
+                            shoe.add(Photograph(absolutePathOfImage))
                         }
                     }
                 }
-
-                val cursorBottom = context.contentResolver.query(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    null,
-                    selection,
-                    selectionArgsBottom,
-                    null)
-                if (cursorBottom != null) {
-                    while(cursorBottom.moveToNext()) {
-                        val absolutePathOfImage = cursorBottom.getString(cursorBottom.getColumnIndexOrThrow(
-                            MediaStore.MediaColumns.DATA))
-                        bottom.add(Photograph(absolutePathOfImage))
-                    }
+                    return instance
                 }
-
-                val cursorShoe = context.contentResolver.query(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    null,
-                    selection,
-                    selectionArgsShoe,
-                    null)
-                if (cursorShoe != null) {
-                    while(cursorShoe.moveToNext()) {
-                        val absolutePathOfImage = cursorShoe.getString(cursorShoe.getColumnIndexOrThrow(
-                            MediaStore.MediaColumns.DATA))
-                        shoe.add(Photograph(absolutePathOfImage))
-                    }
-                }
-                return instance
             }
         }
-    }
 
 
 
