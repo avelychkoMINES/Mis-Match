@@ -157,52 +157,52 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
     fun getShoePhoto(): List<Photograph> {
         return photographRepository.getShoePhoto()
     }
-//
-//    fun moveToNextTop() {
-//        indexTop++
-//        if (indexTop >= topList.size) {
-//            indexTop = 0
-//        }
-//        selectedTopState.value = topList[indexTop]
-//    }
-//
-//    fun moveToNextBottom() {
-//        indexBottom++
-//        if (indexBottom >= bottomList.size) {
-//            indexBottom = 0
-//        }
-//        selectedBottomState.value = bottomList[indexBottom]
-//    }
-//
-//    fun moveToNextShoe() {
-//        indexShoe++
-//        if (indexShoe >= shoeList.size) {
-//            indexShoe = 0
-//        }
-//        selectedShoeState.value = shoeList[indexShoe]
-//    }
-//
-//    fun moveToPrevTop() {
-//        indexTop--
-//        if (indexTop < 0) {
-//            indexTop = topList.size - 1
-//        }
-//        selectedTopState.value = topList[indexTop]
-//    }
-//
-//    fun moveToPrevBottom() {
-//        indexBottom--
-//        if (indexBottom < 0) {
-//            indexBottom = bottomList.size - 1
-//        }
-//        selectedBottomState.value = bottomList[indexBottom]
-//    }
-//
-//    fun moveToPrevShoe() {
-//        indexShoe--
-//        if (indexShoe < 0) {
-//            indexShoe = shoeList.size - 1
-//        }
-//        selectedShoeState.value = shoeList[indexShoe]
-//    }
+
+    fun moveToNextTop() {
+        indexTop++
+        if (indexTop >= photographRepository.getTopPhoto().size) {
+            indexTop = 0
+        }
+        selectedTopState.value = photographRepository.getTopPhoto()[indexTop]
+    }
+
+    fun moveToNextBottom() {
+        indexBottom++
+        if (indexBottom >= photographRepository.getBottomPhoto().size) {
+            indexBottom = 0
+        }
+        selectedBottomState.value = photographRepository.getBottomPhoto()[indexBottom]
+    }
+
+    fun moveToNextShoe() {
+        indexShoe++
+        if (indexShoe >= photographRepository.getShoePhoto().size) {
+            indexShoe = 0
+        }
+        selectedShoeState.value = photographRepository.getShoePhoto()[indexShoe]
+    }
+
+    fun moveToPrevTop() {
+        indexTop--
+        if (indexTop < 0) {
+            indexTop = photographRepository.getTopPhoto().size - 1
+        }
+        selectedTopState.value = photographRepository.getTopPhoto()[indexTop]
+    }
+
+    fun moveToPrevBottom() {
+        indexBottom--
+        if (indexBottom < 0) {
+            indexBottom = photographRepository.getBottomPhoto().size - 1
+        }
+        selectedBottomState.value = photographRepository.getBottomPhoto()[indexBottom]
+    }
+
+    fun moveToPrevShoe() {
+        indexShoe--
+        if (indexShoe < 0) {
+            indexShoe = photographRepository.getShoePhoto().size - 1
+        }
+        selectedShoeState.value = photographRepository.getShoePhoto()[indexShoe]
+    }
 }

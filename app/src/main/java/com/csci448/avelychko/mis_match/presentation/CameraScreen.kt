@@ -26,6 +26,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.csci448.avelychko.mis_match.R
+import com.csci448.avelychko.mis_match.data.Photograph
+import com.csci448.avelychko.mis_match.data.PhotographRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -65,36 +67,18 @@ fun CameraView() {
                             color = Color.White,
                             fontSize = 24.sp,
                             modifier = Modifier.clickable {
-                                Toast.makeText(
-                                    context,
-                                    "Taking top pic",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
                                 type = "Tops-"
                             });
                         Text(text = "Bottoms",
                             color = Color.White,
                             fontSize = 24.sp,
                             modifier = Modifier.clickable {
-                                Toast.makeText(
-                                    context,
-                                    "Taking bottoms pic",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
                                 type = "Bottoms-"
                             });
                         Text(text = "Shoes",
                             color = Color.White,
                             fontSize = 24.sp,
                             modifier = Modifier.clickable {
-                                Toast.makeText(
-                                    context,
-                                    "Taking shoes pic",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
                                 type = "Shoes-"
                             });
                     }
@@ -103,7 +87,6 @@ fun CameraView() {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         IconButton(onClick = {
-                            //Toast.makeText(context, "Takes a picture", Toast.LENGTH_SHORT).show()
                             takePhoto(imageCapture, context, type)
                         }) {
                             Icon(
@@ -170,6 +153,50 @@ private fun takePhoto(imageCapture: ImageCapture?, context: Context, type: Strin
             }
         }
     )
+
+    updatePhoto(context)
+}
+
+private fun updatePhoto(context: Context) {
+
+    Log.d("getphoto", "cursor start")
+    Log.d("getphoto", "media ${MediaStore.Images.Media.EXTERNAL_CONTENT_URI}")
+
+    val cursor = context.contentResolver.query(
+        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+        null,
+        null,
+        null,
+        null
+    )
+    if (cursor != null) {
+        Log.d("getphoto", "cursor not null")
+        Log.d("getphoto", "cursorTop $cursor")
+
+        Log.d("getphoto", "cursorcount ${cursor.count}")
+
+        PhotographRepository.top.clear()
+        PhotographRepository.bottom.clear()
+        PhotographRepository.shoe.clear()
+
+        while (cursor.moveToNext()) {
+            Log.d("getphoto", "cursorTop $cursor")
+            val absolutePathOfImage = cursor.getString(
+                cursor.getColumnIndexOrThrow(
+                    MediaStore.MediaColumns.DATA
+                )
+            )
+            Log.d("getphoto", "absolutepath $absolutePathOfImage")
+
+            if (absolutePathOfImage.contains("Tops")) {
+                PhotographRepository.top.add(Photograph(absolutePathOfImage))
+            } else if (absolutePathOfImage.contains("Bottoms")) {
+                PhotographRepository.bottom.add(Photograph(absolutePathOfImage))
+            } else if (absolutePathOfImage.contains("Shoes")) {
+                PhotographRepository.shoe.add(Photograph(absolutePathOfImage))
+            }
+        }
+    }
 }
 
 //@Preview(showBackground = true)

@@ -47,10 +47,6 @@ private constructor(private val photographDao: PhotographDao,
                     MediaStore.MediaColumns.RELATIVE_PATH + " like ? "
                 else MediaStore.Images.Media.DATA + " like ? "
 
-                val selectionArgsTop = arrayOf("Picture/CameraX-Image/Top/")
-                val selectionArgsBottom = arrayOf("Picture/CameraX-Image/Bottom/")
-                val selectionArgsShoe = arrayOf("Picture/CameraX-Image/Shoe/")
-
                 Log.d(LOG_TAG, "cursor start")
                 Log.d(LOG_TAG, "selection $selection")
                 Log.d(LOG_TAG, "media ${MediaStore.Images.Media.EXTERNAL_CONTENT_URI}")
@@ -58,8 +54,6 @@ private constructor(private val photographDao: PhotographDao,
                 val cursor = context.contentResolver.query(
                     MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                     null,
-                    //selection,
-                    //selectionArgsTop,
                     null,
                     null,
                     null

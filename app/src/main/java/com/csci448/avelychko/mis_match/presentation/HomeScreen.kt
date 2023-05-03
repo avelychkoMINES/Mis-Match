@@ -22,7 +22,7 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewMode
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Unit,
-                onSavedOutfitsClick: () -> Unit, onStyleGeneratorClick: () -> Unit,
+                onSavedOutfitsClick: () -> Unit,
                 onClosetClick: () -> Unit, onCameraClick: () -> Unit) {
 
     Column() {
@@ -72,20 +72,6 @@ fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Uni
                         fontFamily = FontFamily.Serif,
                         fontWeight = FontWeight.Light)
 
-                }
-                ElevatedButton(
-                    onClick = { onStyleGeneratorClick() },
-                    shape = CutCornerShape(10),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 30.dp)
-                ) {
-                    Text("Outfit Generator",
-                        fontSize = 24.sp,
-                        textAlign = TextAlign.Center,
-                        fontFamily = FontFamily.Serif,
-                        fontWeight = FontWeight.Light
-                    )
                 }
                 ElevatedButton(
                     onClick = { onClosetClick() },

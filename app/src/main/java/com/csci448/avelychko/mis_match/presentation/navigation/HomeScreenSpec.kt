@@ -26,10 +26,6 @@ object HomeScreenSpec : IScreenSpec {
         {
             navController.navigate("saved outfits")
         },
-            onStyleGeneratorClick =
-        {
-            navController.navigate("style generator")
-        },
             onClosetClick =
         {
             navController.navigate("closet")

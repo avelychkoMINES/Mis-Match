@@ -38,24 +38,26 @@ fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
         Divider(thickness = 2.dp, color = Color.Black)
 
         Box(
-            contentAlignment = Alignment.Center,
+            //contentAlignment = Alignment.Center,
             modifier = Modifier
                 .weight(0.8f)
-                .background(color = Color(red = 225, green = 208, blue = 191)),
+                .background(color = Color(red = 225, green = 208, blue = 191)).fillMaxSize(),
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Tops",
                         fontSize = 24.sp)
                     LazyRow(content = { items(viewModel.getTopPhoto()) { item ->
-                        AsyncImage(model = item.photographFileName, contentDescription = "")
+                        AsyncImage(model = item.photographFileName, contentDescription = "",
+                            modifier = Modifier.width(80.dp).height(80.dp))
                     } })
                 }
                 Column(Modifier.padding(vertical = 40.dp)) {
                     Text(text = "Bottoms",
                         fontSize = 24.sp)
                     LazyRow(content = { items(viewModel.getBottomPhoto()) { item ->
-                        AsyncImage(model = item.photographFileName, contentDescription = "")
+                        AsyncImage(model = item.photographFileName, contentDescription = "",
+                            modifier = Modifier.width(80.dp).height(80.dp))
                     } })
                 }
 
@@ -63,7 +65,8 @@ fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
                     Text(text = "Shoes",
                         fontSize = 24.sp)
                     LazyRow(content = { items(viewModel.getShoePhoto()) { item ->
-                        AsyncImage(model = item.photographFileName, contentDescription = "")
+                        AsyncImage(model = item.photographFileName, contentDescription = "",
+                            modifier = Modifier.width(80.dp).height(80.dp))
                     } })
                 }
 
