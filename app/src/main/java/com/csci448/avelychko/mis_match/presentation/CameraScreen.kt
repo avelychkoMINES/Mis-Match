@@ -92,7 +92,8 @@ fun CameraView() {
                             Icon(
                                 painter = painterResource(id = R.drawable.baseline_circle_24),
                                 contentDescription = "",
-                                tint = Color.White
+                                tint = Color.White,
+                                modifier = Modifier.width(100.dp).height(100.dp)
                             )
                         }
                     }

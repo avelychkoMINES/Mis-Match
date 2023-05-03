@@ -42,15 +42,15 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .weight(0.8f)
-                .background(color = Color(red = 225, green = 208, blue = 191)),
+                .weight(0.9f)
+                .background(color = Color(red = 225, green = 208, blue = 191)).fillMaxWidth(),
         ) {
             //ARROW & IMAGE
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
-                Box() {
-                    Column() {
-                        Row(modifier = Modifier.fillMaxHeight(0.3f).fillMaxWidth()) {
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.SpaceEvenly) {
+                        Row(modifier = Modifier.fillMaxHeight(0.29f).fillMaxWidth()) {
                             IconButton(onClick = {
                                 viewModel.moveToPrevTop()
                                 mMediaPlayer.start();
@@ -60,14 +60,14 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
                                     contentDescription = ""
                                 )
                             }
-                                Box(modifier = Modifier.fillMaxWidth(0.8f),
+                                Box(modifier = Modifier.fillMaxWidth(0.9f),
                                     contentAlignment = Alignment.Center) {
                                     //ImageDisplay(viewModel.selectedTopState.value)
                                     if (viewModel.selectedTopState.value != null) {
                                         AsyncImage(
                                             model = viewModel.selectedTopState.value!!.photographFileName,
                                             contentDescription = "",
-                                            modifier = Modifier.width(130.dp).height(130.dp)
+                                            modifier = Modifier.fillMaxWidth()
                                         )
                                     }
                                 }
@@ -82,7 +82,7 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
                                 }
                             }
 
-                        Row(modifier = Modifier.fillMaxHeight(0.4f).fillMaxWidth()) {
+                        Row(modifier = Modifier.fillMaxHeight(0.405f).fillMaxWidth()) {
                             IconButton(onClick = {
                                 viewModel.moveToPrevBottom()
                                 mMediaPlayer.start();
@@ -92,13 +92,13 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
                                     contentDescription = ""
                                 )
                             }
-                            Box(modifier = Modifier.fillMaxWidth(0.8f),
+                            Box(modifier = Modifier.fillMaxWidth(0.9f),
                                 contentAlignment = Alignment.Center) {
                                 if (viewModel.selectedBottomState.value != null) {
                                     AsyncImage(
                                         model = viewModel.selectedBottomState.value!!.photographFileName,
                                         contentDescription = "",
-                                        Modifier.width(150.dp).height(150.dp)
+                                        modifier = Modifier.fillMaxWidth()
                                     )
                                 }
                             }
@@ -113,7 +113,7 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
                                 )
                             }
                         }
-                        Row(modifier = Modifier.fillMaxHeight(0.3f).fillMaxWidth()) {
+                        Row(modifier = Modifier.fillMaxHeight(0.68f).fillMaxWidth()) {
                             IconButton(onClick = {
                                 viewModel.moveToPrevShoe()
                                 mMediaPlayer.start();
@@ -123,13 +123,13 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
                                     contentDescription = ""
                                 )
                             }
-                            Box(modifier = Modifier.fillMaxWidth(0.8f),
+                            Box(modifier = Modifier.fillMaxWidth(0.9f),
                                 contentAlignment = Alignment.Center) {
                                 if (viewModel.selectedShoeState.value != null) {
                                     AsyncImage(
                                         model = viewModel.selectedShoeState.value!!.photographFileName,
                                         contentDescription = "",
-                                        modifier = Modifier.width(100.dp).height(100.dp)
+                                        modifier = Modifier.fillMaxWidth()
                                     )
                                 }
                             }
@@ -151,7 +151,6 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
 
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(5.dp)
             .background(color = Color(red = 225, green = 208, blue = 191)),
             Arrangement.SpaceBetween
         ) {

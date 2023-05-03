@@ -91,7 +91,8 @@ fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Uni
 
                 }
             IconButton(onClick = { onCameraClick() }, modifier = Modifier.align(Alignment.BottomEnd)) {
-                Icon(painter = painterResource(id = R.drawable.baseline_camera_alt_24), contentDescription = "")
+                Icon(painter = painterResource(id = R.drawable.baseline_camera_alt_24), contentDescription = "",
+                modifier = Modifier.width(100.dp).height(100.dp))
             }
 
         }
