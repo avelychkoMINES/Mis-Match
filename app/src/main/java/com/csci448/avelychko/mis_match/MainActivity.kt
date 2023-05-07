@@ -31,6 +31,46 @@ class MainActivity : ComponentActivity() {
     private val notificationReceiver = NotificationReceiver()
 
     companion object {
+        private const val ROUTE_LOCATION = "Map"//"location"
+        private const val ARG_LATITUDE = "lat"
+        private const val ARG_LONGITUDE = "long"
+        private const val SCHEME = "https"
+        private const val HOST = "geolocatr.labs.csci448.mines.edu"
+        private const val BASE_URI = "$SCHEME://$HOST"
+
+        fun createPendingIntent(context: Context, location: Location):
+                PendingIntent {
+            val deepLinkIntent = Intent(
+                Intent.ACTION_VIEW,
+                formatUriString(location).toUri(),
+                context,
+                MainActivity::class.java
+            )
+            return TaskStackBuilder.create(context).run {
+                addNextIntentWithParentStack(deepLinkIntent)
+                getPendingIntent(
+                    0,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+            }
+        }
+        private fun formatUriString(location: Location? = null): String {
+            val uriStringBuilder = StringBuilder()
+            uriStringBuilder.append(BASE_URI)
+            uriStringBuilder.append("/$ROUTE_LOCATION/")
+            if (location == null) {
+                uriStringBuilder.append("{$ARG_LATITUDE}")
+            } else {
+                uriStringBuilder.append(location.latitude)
+            }
+            uriStringBuilder.append("/")
+            if (location == null) {
+                uriStringBuilder.append("{$ARG_LONGITUDE}")
+            } else {
+                uriStringBuilder.append(location.longitude)
+            }
+            return uriStringBuilder.toString()
+        }
 
     }
 
