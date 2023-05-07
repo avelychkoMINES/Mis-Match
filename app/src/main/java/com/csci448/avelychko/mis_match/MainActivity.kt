@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var viewModel: PhotographViewModel
+    private lateinit var notificationPermissionLauncher: ActivityResultLauncher<Array<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,7 @@ class MainActivity : ComponentActivity() {
                 cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
             }
         cameraUtility = CameraUtility(this@MainActivity)
+
 
         setContent {
             val navController = rememberNavController()
