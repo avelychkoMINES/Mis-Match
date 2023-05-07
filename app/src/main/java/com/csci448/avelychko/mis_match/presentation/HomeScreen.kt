@@ -25,26 +25,10 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewMode
 @Composable
 fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Unit,
                 onSavedOutfitsClick: () -> Unit,
-                onClosetClick: () -> Unit, onCameraClick: () -> Unit) {
+                onClosetClick: () -> Unit, onCameraClick: () -> Unit,
+                onSettingsClick: () -> Unit) {
 
     Column() {
-//        CenterAlignedTopAppBar(title = {Row() {Text("Mis-Match",
-//            textAlign = TextAlign.Center,
-//            fontWeight = FontWeight.ExtraBold,
-//            color = Color(224, 224, 224),
-//            fontSize = 42.sp,
-//            fontFamily = FontFamily.Serif)
-//            Text("!",
-//                textAlign = TextAlign.Center,
-//                fontWeight = FontWeight.ExtraBold,
-//                color = Color(red=226, green=114, blue=91),
-//                fontSize = 42.sp,
-//                fontFamily = FontFamily.Serif)}},
-//            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(Color(red = 88, green = 76, blue = 109)),
-//            )
-
-
-
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -106,6 +90,25 @@ fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Uni
                     Icon(painter = painterResource(id = R.drawable.clothes_hanger_icon_3), contentDescription = "View Your Closet",
                         modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
                     Text("View Your Closet",
+                        fontSize = 28.sp,
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Light,
+                        color = Color(red=226, green=114, blue=91))
+                }
+
+                ElevatedButton(
+                    onClick = { onSettingsClick() },
+                    shape = CutCornerShape(0),
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .fillMaxHeight(0.35f)
+                        .padding(horizontal = 20.dp, vertical = 30.dp)
+                        .clip(RoundedCornerShape(0.dp))
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.clothes_hanger_icon_3), contentDescription = "View Your Closet",
+                        modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
+                    Text("Settings",
                         fontSize = 28.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.SansSerif,

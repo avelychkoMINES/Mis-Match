@@ -40,15 +40,16 @@ object HomeScreenSpec : IScreenSpec {
         }, onSavedOutfitsClick =
         {
             navController.navigate("saved outfits")
-        }
-            ,
-            onClosetClick =
+        }, onClosetClick =
         {
             navController.navigate("closet")
-        },
-        {
-            cameraUtility.checkPermissionAndGetCamera(activity, permissionLauncher)
-            navController.navigate("camera")
-        })
+        }, onSettingsClick =
+            {
+                navController.navigate("settings")
+            },
+            onCameraClick = {
+                cameraUtility.checkPermissionAndGetCamera(activity, permissionLauncher)
+                navController.navigate("camera")
+            })
     }
 }
