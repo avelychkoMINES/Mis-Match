@@ -18,53 +18,82 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import coil.compose.AsyncImage
+import com.csci448.avelychko.mis_match.data.Photograph
 import com.csci448.avelychko.mis_match.presentation.ImageDisplay
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
+import kotlinx.coroutines.launch
+import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
-        CenterAlignedTopAppBar(title = {
-            Text("Mis-Match!",
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 36.sp,
-                fontFamily = FontFamily.Serif) },
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(Color(red = 199, green = 173, blue = 127)),
-            modifier = Modifier.clickable { onLogoClicked() }
-        )
-        Divider(thickness = 2.dp, color = Color.Black)
 
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(red = 88, green = 76, blue = 109)),
+            horizontalArrangement = Arrangement.Center) {
+            Text(text = "My Closet", fontSize = 30.sp,
+                color = Color(red=226, green=114, blue=91),
+                fontFamily = FontFamily.Serif,
+                fontWeight = FontWeight.SemiBold)
+        }
         Box(
             //contentAlignment = Alignment.Center,
             modifier = Modifier
                 .weight(0.8f)
-                .background(color = Color(red = 225, green = 208, blue = 191)).fillMaxSize(),
+                .background(color = Color(224, 224, 224)).fillMaxSize(),
         ) {
-            Column(modifier = Modifier.padding(20.dp)) {
+            Column() {
                 Column(Modifier.padding(vertical = 40.dp)) {
-                    Text(text = "Tops",
-                        fontSize = 24.sp)
-                    LazyRow(content = { items(viewModel.getTopPhoto()) { item ->
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(red=241, green=241, blue=241)),
+                        horizontalArrangement = Arrangement.Start) {
+                        Text(text = "Tops", fontSize = 26.sp,
+                            color = Color(red=226, green=114, blue=91),
+                            fontFamily = FontFamily.Serif,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(10.dp))
+                    }
+                    LazyRow(modifier = Modifier.padding(10.dp), content = { items(viewModel.getTopPhoto()) { item ->
                         AsyncImage(model = item.photographFileName, contentDescription = "",
-                            modifier = Modifier.width(80.dp).height(80.dp))
+                            modifier = Modifier.width(80.dp).height(80.dp).clickable {
+                                deletePhoto(item, viewModel)
+                            })
                     } })
                 }
                 Column(Modifier.padding(vertical = 40.dp)) {
-                    Text(text = "Bottoms",
-                        fontSize = 24.sp)
-                    LazyRow(content = { items(viewModel.getBottomPhoto()) { item ->
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(red=241, green=241, blue=241)),
+                        horizontalArrangement = Arrangement.Start) {
+                        Text(text = "Bottoms", fontSize = 26.sp,
+                            color = Color(red=226, green=114, blue=91),
+                            fontFamily = FontFamily.Serif,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(10.dp))
+                    }
+                    LazyRow(modifier = Modifier.padding(10.dp),content = { items(viewModel.getBottomPhoto()) { item ->
                         AsyncImage(model = item.photographFileName, contentDescription = "",
                             modifier = Modifier.width(80.dp).height(80.dp))
                     } })
                 }
 
                 Column(Modifier.padding(vertical = 40.dp)) {
-                    Text(text = "Shoes",
-                        fontSize = 24.sp)
-                    LazyRow(content = { items(viewModel.getShoePhoto()) { item ->
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(red=241, green=241, blue=241)),
+                        horizontalArrangement = Arrangement.Start) {
+                        Text(text = "Shoes", fontSize = 26.sp,
+                            color = Color(red=226, green=114, blue=91),
+                            fontFamily = FontFamily.Serif,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(10.dp))
+                    }
+                    LazyRow(modifier = Modifier.padding(10.dp), content = { items(viewModel.getShoePhoto()) { item ->
                         AsyncImage(model = item.photographFileName, contentDescription = "",
                             modifier = Modifier.width(80.dp).height(80.dp))
                     } })
@@ -81,3 +110,16 @@ fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
 //fun ClosetPreview() {
 //    ClosetView() {}
 //}
+
+fun deletePhoto(photograph: Photograph, viewModel: PhotographViewModel) {
+    val file = File(photograph.photographFileName)
+    if (file.exists()) {
+        file.delete()
+        viewModel.deletePhotograph(photograph)
+
+        // Trigger recomposition manually
+        //viewModel.refresh()
+    // Perform necessary operations to update the database or list of photos
+    }
+
+}

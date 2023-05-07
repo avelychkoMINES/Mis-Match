@@ -7,8 +7,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.csci448.avelychko.mis_match.data.Photograph
+import com.csci448.avelychko.mis_match.data.Triplet
 
-@Database(entities=[Photograph::class], version=1)
+@Database(entities=[Photograph::class, Triplet::class], version=1)
 @TypeConverters(PhotographTypeConverters::class)
 abstract class PhotographDatabase : RoomDatabase() {
     companion object {

@@ -20,15 +20,6 @@ fun StyleScreen (viewModel: PhotographViewModel, onStyleClicked: (String) -> Uni
     val currentContext = LocalContext.current
 
     Column() {
-        CenterAlignedTopAppBar(title = {Text("Mis-Match!",
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 36.sp,
-            fontFamily = FontFamily.Serif) },
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(Color(red = 199, green = 173, blue = 127)),
-            modifier = Modifier.clickable { onLogoClicked() }
-        )
-        Divider(thickness = 2.dp, color = Color.Black)
 
 
         Box(
@@ -36,7 +27,7 @@ fun StyleScreen (viewModel: PhotographViewModel, onStyleClicked: (String) -> Uni
             modifier = Modifier
                 .weight(0.8f)
                 .fillMaxWidth()
-                .background(color = Color(red = 225, green = 208, blue = 191)),
+                .background(color = Color(224, 224, 224)),
         ) {
 
         }

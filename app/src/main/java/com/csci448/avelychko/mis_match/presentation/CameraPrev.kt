@@ -56,6 +56,7 @@ fun SimpleCameraPreview(imageCapture: ImageCapture?) {
                     it.setSurfaceProvider(previewView.surfaceProvider)
                 }
 
+
                 val cameraSelector = CameraSelector.Builder()
                     .requireLensFacing(CameraSelector.LENS_FACING_BACK)
                     .build()

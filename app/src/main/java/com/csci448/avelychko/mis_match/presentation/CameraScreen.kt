@@ -11,13 +11,16 @@ import android.widget.Toast
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -28,17 +31,23 @@ import androidx.core.content.ContextCompat
 import com.csci448.avelychko.mis_match.R
 import com.csci448.avelychko.mis_match.data.Photograph
 import com.csci448.avelychko.mis_match.data.PhotographRepository
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
-fun CameraView() {
+fun CameraView(viewModel: PhotographViewModel, coroutineScope: CoroutineScope) {
     val imageCapture = ImageCapture.Builder()
         .build()
     val context = LocalContext.current
     var type = remember {
         ""
     }
+    val topColor = remember {mutableStateOf(Color.Gray)}
+    val bottomColor = remember {mutableStateOf(Color.Gray)}
+    val shoeColor = remember {mutableStateOf(Color.Gray)}
 
     Box {
         SimpleCameraPreview(imageCapture)
@@ -64,22 +73,39 @@ fun CameraView() {
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(text = "Tops",
-                            color = Color.White,
+                            color = topColor.value,
                             fontSize = 24.sp,
                             modifier = Modifier.clickable {
+                                
+                                //viewModel.selectedCameraState.tryEmit("T")
                                 type = "Tops-"
-                            });
+//                                shoeColor.value = Color.Gray
+//                                topColor.value = Color.White
+//                                bottomColor.value = Color.Gray
+                            })
                         Text(text = "Bottoms",
-                            color = Color.White,
+                            color = bottomColor.value,
                             fontSize = 24.sp,
                             modifier = Modifier.clickable {
+//                                coroutineScope.launch{
+//                                    viewModel.selectedCameraState.value = "B"
+//                                }
+
                                 type = "Bottoms-"
+//                                shoeColor.value = Color.Gray
+//                                topColor.value = Color.Gray
+//                                bottomColor.value = Color.White
+                                //bottomColor.value = Color.White
                             });
                         Text(text = "Shoes",
-                            color = Color.White,
+                            color = shoeColor.value,
                             fontSize = 24.sp,
                             modifier = Modifier.clickable {
+                                //viewModel.selectedCameraState.value = "S"
                                 type = "Shoes-"
+//                                shoeColor.value = Color.White
+//                                topColor.value = Color.Gray
+//                                bottomColor.value = Color.Gray
                             });
                     }
                     Row(
@@ -118,12 +144,12 @@ private fun takePhoto(imageCapture: ImageCapture?, context: Context, type: Strin
         .format(System.currentTimeMillis())
     val contentValues = ContentValues()
         .apply {
-        put(MediaStore.MediaColumns.DISPLAY_NAME, type + name)
-        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image/")
+            put(MediaStore.MediaColumns.DISPLAY_NAME, type + name)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image/")
+            }
         }
-    }
     Log.d(TAG, "contentValues: $contentValues")
 
     // Create output options object which contains file + metadata
@@ -199,6 +225,10 @@ private fun updatePhoto(context: Context) {
         }
     }
 }
+//    viewModel.builderEnabled.value =
+//        (viewModel.getTopPhoto().isNotEmpty() && viewModel.getBottomPhoto().isNotEmpty()
+//                && viewModel.getShoePhoto().isNotEmpty())
+
 
 //@Preview(showBackground = true)
 //@Composable

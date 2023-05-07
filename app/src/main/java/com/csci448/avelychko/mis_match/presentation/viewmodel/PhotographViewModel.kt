@@ -74,10 +74,12 @@ package com.csci448.avelychko.mis_match.presentation.viewmodel
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csci448.avelychko.mis_match.data.Photograph
 import com.csci448.avelychko.mis_match.data.PhotographRepository
+import com.csci448.avelychko.mis_match.data.Triplet
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -88,12 +90,18 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
         private const val LOG_TAG = "448.PhotographViewModel"
     }
 
-    val selectedTopState: MutableState<Photograph?> = mutableStateOf(null);
-    val selectedBottomState: MutableState<Photograph?> = mutableStateOf(null);
-    val selectedShoeState: MutableState<Photograph?> = mutableStateOf(null);
+    val selectedTopState: MutableState<Photograph?> = mutableStateOf(null)
+    val selectedBottomState: MutableState<Photograph?> = mutableStateOf(null)
+    val selectedShoeState: MutableState<Photograph?> = mutableStateOf(null)
     var indexTop: Int = 0;
     var indexBottom: Int = 0;
     var indexShoe: Int = 0;
+
+    var typeString = ""
+
+    val selectedCameraState = MutableStateFlow("")
+
+    val builderEnabled = mutableStateOf(false)
 
     private val mPhotographListStateFlow: MutableStateFlow<List<Photograph>> = MutableStateFlow(emptyList())
     val photographListStateFlow: StateFlow<List<Photograph>>
@@ -120,6 +128,13 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
                     mCurrentPhotographStateFlow.update { photograph }
                 }
         }
+
+        if (getTopPhoto().isNotEmpty() && getBottomPhoto().isNotEmpty()
+            && getShoePhoto().isNotEmpty()) {
+            builderEnabled.value = true
+        } else {
+            builderEnabled.value = false
+        }
     }
 
     override fun onCleared() {
@@ -133,6 +148,47 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
         mPhotographIdStateFlow.update { uuid }
     }
 
+//    fun getTriplets(): List<Triplet> {
+//        val tripletsLiveData = MutableLiveData<List<Triplet>>()
+//
+//        viewModelScope.launch {
+//            try {
+//                val triplets = photographRepository.getAllTriplets()
+//                tripletsLiveData.value = triplets
+//                Log.d(LOG_TAG, triplets.toString())
+//            } catch (e: Exception) {
+//                Log.e(LOG_TAG, e.toString())
+//            }
+//        }
+//
+//        if (tripletsLiveData.value == null) {
+//            return emptyList()
+//        }
+//        else {
+//            Log.d(LOG_TAG, "returning triplets")
+//            return tripletsLiveData.value!!
+//        }
+//    }
+    fun getTriplets(): Flow<List<Triplet>> = flow {
+        try {
+            val triplets = photographRepository.getAllTriplets()
+            emit(triplets)
+            Log.d(LOG_TAG, triplets.toString())
+        } catch (e: Exception) {
+            Log.e(LOG_TAG, e.toString())
+        }
+    }
+
+    fun addTriplet(triplet: Triplet) {
+        Log.d(LOG_TAG, "creating a triplet: $triplet")
+        photographRepository.addTriplet(triplet)
+    }
+
+    fun deleteTriplet(triplet: Triplet) {
+        Log.d(LOG_TAG, "deleting triplet: $triplet")
+        photographRepository.deleteTriplet(triplet)
+    }
+
     fun addPhotograph(photograph: Photograph) {
         Log.d(LOG_TAG, "addPhotograph(${photograph.id}) called")
         photographRepository.addPhotograph(photograph)
@@ -144,6 +200,17 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
             mCurrentPhotographStateFlow.update { null }
         }
         photographRepository.deletePhotograph(photograph)
+    }
+
+
+    private val mSnapshotFlow: MutableStateFlow<List<Photograph>> = MutableStateFlow(emptyList())
+    val snapshotFlow: StateFlow<List<Photograph>> get() = mSnapshotFlow
+
+    fun refresh() {
+        viewModelScope.launch {
+            val photographs = photographRepository.getTopPhoto()
+            mSnapshotFlow.value = photographs
+        }
     }
 
     fun getTopPhoto(): MutableList<Photograph> {

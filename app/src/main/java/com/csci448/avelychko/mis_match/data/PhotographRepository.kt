@@ -6,9 +6,11 @@ import android.provider.MediaStore
 import android.util.Log
 import com.csci448.avelychko.mis_match.data.database.PhotographDao
 import com.csci448.avelychko.mis_match.data.database.PhotographDatabase
+import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -102,6 +104,38 @@ private constructor(private val photographDao: PhotographDao,
     fun getPhotographs() = photographDao.getPhotographs()
 
     suspend fun getPhotograph(id: UUID) = photographDao.getPhotograph(id)
+
+    suspend fun getPhotographsForTriplet(tripletId: Int) = photographDao.getPhotographsForTriplet(tripletId)
+
+    suspend fun getAllTriplets(): List<Triplet> {
+        val allTriplets = photographDao.getAllTriplets()
+        Log.d(LOG_TAG, "triplets: ${allTriplets}")
+//        for (triplet in allTriplets) {
+//            val photographs = photographDao.getPhotographsForTriplet(triplet.tripletId)
+//            triplet.top = photographs.find { it.photographFileName.contains("top", ignoreCase = true) }
+//            triplet.bottom = photographs.find { it.photographFileName.contains("bottom", ignoreCase = true) }
+//            triplet.shoe = photographs.find { it.photographFileName.contains("shoe", ignoreCase = true) }
+//        }
+
+        return allTriplets
+    }
+
+    fun addTriplet(triplet: Triplet) {
+        coroutineScope.launch {
+            try {
+                photographDao.addTriplet(triplet)
+                Log.d("Repository", "Triplet added successfully")
+            } catch (e: Exception) {
+                Log.e("Repository", "Error adding triplet: ${e.message}")
+            }
+        }
+    }
+
+    fun deleteTriplet(triplet: Triplet) {
+        coroutineScope.launch {
+            photographDao.deleteTriplet(triplet)
+        }
+    }
 
     fun addPhotograph(photograph: Photograph) {
         coroutineScope.launch {
