@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var viewModel: PhotographViewModel
     private lateinit var notificationPermissionLauncher: ActivityResultLauncher<Array<String>>
+    private val notificationReceiver = NotificationReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,12 @@ class MainActivity : ComponentActivity() {
                 // process if permissions were granted
                 cameraUtility.checkPermissionAndGetCamera(this@MainActivity, permissionLauncher)
             }
+            
+         notificationPermissionLauncher =
+           registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+               locationAlarmReceiver.checkPermissionAndScheduleAlarm(this, alarmPermissionLauncher)
+           }
+           
         cameraUtility = CameraUtility(this@MainActivity)
 
 
