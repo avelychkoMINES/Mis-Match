@@ -1,4 +1,4 @@
-package com.csci448.avelychko.mis_match.util
+package com.csci448.avelychko.mis_match
 
 import android.Manifest
 import android.app.PendingIntent
@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
@@ -17,15 +16,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.startActivity
-import com.csci448.avelychko.mis_match.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
 class NotificationReceiver : BroadcastReceiver() {
-    var lastLocation: Location? = null
-    val LOG_TAG = "LocationAlarmReceiver"
+    val LOG_TAG = "NotificationReceiver"
 
-    companion object locAlarm{
+    companion object {
         private const val ALARM_ACTION = "448_ALARM_ACTION"
         private fun createIntent(context: Context): Intent {
             val intent = Intent(context, NotificationReceiver::class.java).apply {
@@ -45,15 +42,15 @@ class NotificationReceiver : BroadcastReceiver() {
             intent,
             PendingIntent.FLAG_IMMUTABLE
         )
-        val alarmDelayInSeconds = 10
+        val alarmDelayInSeconds = 5
         val alarmTimeInUTC = System.currentTimeMillis() + alarmDelayInSeconds * 1_000L
-        Log.d("LocationAlarmReceiver", "Setting alarm for ${
+        Log.d(LOG_TAG, "Setting alarm for ${
             SimpleDateFormat("MM/dd/yyyy HH:mm:ss",
             Locale.US).format(Date(alarmTimeInUTC))}")
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Log.d(LOG_TAG, "running on Version S or newer, checking if can schedule exact alarms")
             if (alarmManager.canScheduleExactAlarms()) {
-                Log.d(LOG_TAG, "can schedule exact alarms")
+                Log.d(LOG_TAG, "can schedule exact alarms: ${pendingIntent}")
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
                     alarmTimeInUTC,
                     pendingIntent)
@@ -85,7 +82,7 @@ class NotificationReceiver : BroadcastReceiver() {
                 val notificationManager = NotificationManagerCompat.from(context)
                 val channel =
                     NotificationChannel(
-                        "channelId",
+                        "0",
                         channelName,
                         NotificationManager.IMPORTANCE_DEFAULT
                     ).apply {
@@ -94,9 +91,10 @@ class NotificationReceiver : BroadcastReceiver() {
                 notificationManager.createNotificationChannel(channel)
 
                 val deepLinkPendingIntent = MainActivity.createPendingIntent(context)
-                val notification = NotificationCompat.Builder(context, "channelId")
-                    .setSmallIcon(android.R.drawable.ic_dialog_map)
+                val notification = NotificationCompat.Builder(context, "0")
+                    .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
                     .setContentTitle("Time to create an outfit for the day!")
+                    .setContentText("ggg")
                     .setContentIntent(deepLinkPendingIntent)
                     .setAutoCancel(true)
                     .build()

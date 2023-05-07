@@ -106,7 +106,7 @@ fun HomeScreen (onOutfitBuilderClick: () -> Unit,
                         .padding(horizontal = 20.dp, vertical = 30.dp)
                         .clip(RoundedCornerShape(0.dp))
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.clothes_hanger_icon_3), contentDescription = "View Your Closet",
+                    Icon(painter = painterResource(id = R.drawable.baseline_settings_24), contentDescription = "View Your Closet",
                         modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
                     Text("Settings",
                         fontSize = 20.sp,

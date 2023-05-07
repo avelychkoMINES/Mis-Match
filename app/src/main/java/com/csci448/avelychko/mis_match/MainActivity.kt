@@ -1,5 +1,9 @@
 package com.csci448.avelychko.mis_match
 
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +17,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.net.toUri
 import androidx.navigation.compose.rememberNavController
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import com.csci448.avelychko.mis_match.ui.theme.MisMatchTheme
@@ -21,7 +26,6 @@ import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
 import androidx.lifecycle.ViewModelProvider
 import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchTopBar
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModelFactory
-import com.csci448.avelychko.mis_match.util.NotificationReceiver
 
 class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
@@ -31,18 +35,16 @@ class MainActivity : ComponentActivity() {
     private val notificationReceiver = NotificationReceiver()
 
     companion object {
-        private const val ROUTE_LOCATION = "Map"//"location"
-        private const val ARG_LATITUDE = "lat"
-        private const val ARG_LONGITUDE = "long"
+        private const val ROUTE_LOCATION = "outfit builder"
         private const val SCHEME = "https"
-        private const val HOST = "geolocatr.labs.csci448.mines.edu"
+        private const val HOST = "csci448.avelychko.mis_match"
         private const val BASE_URI = "$SCHEME://$HOST"
 
-        fun createPendingIntent(context: Context, location: Location):
+        fun createPendingIntent(context: Context):
                 PendingIntent {
             val deepLinkIntent = Intent(
                 Intent.ACTION_VIEW,
-                formatUriString(location).toUri(),
+                formatUriString().toUri(),
                 context,
                 MainActivity::class.java
             )
@@ -54,24 +56,12 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
-        private fun formatUriString(location: Location? = null): String {
+        private fun formatUriString(): String {
             val uriStringBuilder = StringBuilder()
             uriStringBuilder.append(BASE_URI)
             uriStringBuilder.append("/$ROUTE_LOCATION/")
-            if (location == null) {
-                uriStringBuilder.append("{$ARG_LATITUDE}")
-            } else {
-                uriStringBuilder.append(location.latitude)
-            }
-            uriStringBuilder.append("/")
-            if (location == null) {
-                uriStringBuilder.append("{$ARG_LONGITUDE}")
-            } else {
-                uriStringBuilder.append(location.longitude)
-            }
             return uriStringBuilder.toString()
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,35 +106,11 @@ class MainActivity : ComponentActivity() {
                         coroutineScope = coroutineScope,
                         cameraUtility = cameraUtility,
                         activity = this@MainActivity,
-                        permissionLauncher = permissionLauncher
-                    )
-                    }
-                    //SamodelkinListScreen(characterList = samodelkinViewModel.characters) {}
-
-                    //MisMatchScreen(viewModel, this@MainActivity, cameraUtility, permissionLauncher)
+                        permissionLauncher = permissionLauncher,
+                        onNotify = { notificationReceiver.checkPermissionAndScheduleAlarm(this, notificationPermissionLauncher) }
+                    )}
                 }
             }
         }
     }
 }
-
-//@Composable
-//fun MisMatchScreen(
-//    viewModel: PhotographViewModel,
-//    activity: Activity,
-//    cameraUtility: CameraUtility,
-//    permissionLauncher: ActivityResultLauncher<Array<String>>
-//) {
-//    val navController = rememberNavController()
-//    MisMatchNavHost(
-//        navController = navController, activity = activity, viewModel = viewModel,
-//        cameraUtility = cameraUtility, permissionLauncher = permissionLauncher)
-//}
-
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    val viewModel = MisMatchViewModel();
-//    MisMatchTheme {
-//    }
-//}

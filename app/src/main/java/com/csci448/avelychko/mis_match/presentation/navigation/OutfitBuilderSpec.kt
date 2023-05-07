@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import com.csci448.avelychko.mis_match.NotificationReceiver
 import com.csci448.avelychko.mis_match.R
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import com.csci448.avelychko.mis_match.presentation.OutfitBuilderView
@@ -33,7 +34,8 @@ object OutfitBuilderSpec: IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope
+        coroutineScope: CoroutineScope,
+        onNotify: () -> Unit
     ) {
         OutfitBuilderView(viewModel, onLogoClicked = { navController.navigate("home")},
         onRandomizeClick = {viewModel.selectedTopState.value = viewModel.getTopPhoto().random()

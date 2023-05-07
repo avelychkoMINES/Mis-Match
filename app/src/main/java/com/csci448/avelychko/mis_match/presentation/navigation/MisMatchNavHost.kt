@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.navigation
+import com.csci448.avelychko.mis_match.NotificationReceiver
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import com.csci448.avelychko.mis_match.util.CameraUtility
 import kotlinx.coroutines.CoroutineScope
@@ -22,26 +23,9 @@ fun MisMatchNavHost(
     permissionLauncher: ActivityResultLauncher<Array<String>>,
     coroutineScope: CoroutineScope,
     context: Context,
-    modifier: Modifier = Modifier
+    modifier: Modifier,
+    onNotify: () -> Unit
 ) {
-//    NavHost( navController = navController, startDestination = IScreenSpec.root ) {
-//        navigation(IScreenSpec.startDestination, IScreenSpec.root) {
-//            IScreenSpec.allScreens.forEach { screen ->
-//                if(screen != null) {
-//                    composable(route = screen.route, ) {
-//                        screen.Content(
-//                            viewModel = viewModel,
-//                            navController = navController,
-//                            activity = activity,
-//                            cameraUtility = cameraUtility,
-//                            permissionLauncher = permissionLauncher
-//                        )
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
     NavHost(
         modifier = modifier,
         navController = navController,
@@ -65,7 +49,8 @@ fun MisMatchNavHost(
                             coroutineScope = coroutineScope,
                             activity = activity,
                             cameraUtility = cameraUtility,
-                            permissionLauncher = permissionLauncher
+                            permissionLauncher = permissionLauncher,
+                            onNotify = onNotify
                         )
                     }
                 }

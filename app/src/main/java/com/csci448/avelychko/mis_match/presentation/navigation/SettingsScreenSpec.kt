@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import com.csci448.avelychko.mis_match.NotificationReceiver
 import com.csci448.avelychko.mis_match.R
 import com.csci448.avelychko.mis_match.presentation.SettingsScreen
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
@@ -37,8 +38,9 @@ object SettingsScreenSpec  : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope
+        coroutineScope: CoroutineScope,
+        onNotify: () -> Unit
     ) {
-        SettingsScreen()
+        SettingsScreen(viewModel, onNotify)
     }
 }

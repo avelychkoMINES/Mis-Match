@@ -36,6 +36,7 @@ fun CameraView() {
     val imageCapture = ImageCapture.Builder()
         .build()
     val context = LocalContext.current
+
     var type = remember {
         ""
     }

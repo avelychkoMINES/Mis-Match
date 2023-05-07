@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import com.csci448.avelychko.mis_match.NotificationReceiver
 import com.csci448.avelychko.mis_match.R
 import com.csci448.avelychko.mis_match.presentation.CameraView
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
@@ -49,7 +50,8 @@ object CameraSpec: IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope
+        coroutineScope: CoroutineScope,
+        onNotify: () -> Unit
     ) {
         val selectedCameraState = viewModel.selectedCameraState.collectAsState()
         CameraView()

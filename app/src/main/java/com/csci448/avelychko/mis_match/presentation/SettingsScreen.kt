@@ -1,7 +1,10 @@
 package com.csci448.avelychko.mis_match.presentation
 
+import android.app.Activity
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -10,10 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.csci448.avelychko.mis_match.NotificationReceiver
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 
 @Composable
-fun SettingsScreen(viewModel: PhotographViewModel) {
+fun SettingsScreen(viewModel: PhotographViewModel, onNotify: () -> Unit
+) {
     Column(modifier = Modifier.fillMaxSize()) {
 
         Row(
@@ -43,7 +48,12 @@ fun SettingsScreen(viewModel: PhotographViewModel) {
                     Switch(checked = viewModel.notificationsOn.value,
                         onCheckedChange = {
                             viewModel.setNotification(it)
+                            if (it) {
+                                onNotify()
+                            }
                     })
+                }
+                Button(onClick = { onNotify() }) {
                 }
             }
         }

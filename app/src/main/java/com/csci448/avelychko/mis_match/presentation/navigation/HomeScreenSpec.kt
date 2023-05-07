@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import com.csci448.avelychko.mis_match.NotificationReceiver
 import com.csci448.avelychko.mis_match.R
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import com.csci448.avelychko.mis_match.presentation.HomeScreen
@@ -32,9 +33,10 @@ object HomeScreenSpec : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope
+        coroutineScope: CoroutineScope,
+        onNotify: () -> Unit
     ) {
-        HomeScreen(viewModel = viewModel,
+        HomeScreen(
             onOutfitBuilderClick = {
             navController.navigate("outfit builder")
         }, onSavedOutfitsClick =
