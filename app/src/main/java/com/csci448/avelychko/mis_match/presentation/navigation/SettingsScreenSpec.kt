@@ -12,13 +12,14 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.csci448.avelychko.mis_match.R
+import com.csci448.avelychko.mis_match.presentation.SettingsScreen
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import com.csci448.avelychko.mis_match.util.CameraUtility
 import kotlinx.coroutines.CoroutineScope
 
-object StyleGeneratorSpec: IScreenSpec {
+object SettingsScreenSpec  : IScreenSpec {
     override val route: String
-        get() = "style generator"
+        get() = "settings"
     override val arguments: List<NamedNavArgument> = emptyList()
     override fun buildRoute(vararg args: String?) = SavedOutfitsSpec.route
     override var title: Int
@@ -38,14 +39,6 @@ object StyleGeneratorSpec: IScreenSpec {
         context: Context,
         coroutineScope: CoroutineScope
     ) {
-        var context = LocalContext.current
-        StyleScreen(viewModel = viewModel, onStyleClicked = {
-            Toast
-            .makeText(context,
-                "Change Style",
-                Toast.LENGTH_SHORT)
-            .show()
-        }, onLogoClicked = { navController.navigate("home") }
-        )
+        SettingsScreen()
     }
 }

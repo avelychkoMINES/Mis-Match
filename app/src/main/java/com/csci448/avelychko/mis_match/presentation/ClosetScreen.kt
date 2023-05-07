@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import coil.compose.AsyncImage
 import com.csci448.avelychko.mis_match.data.Photograph
-import com.csci448.avelychko.mis_match.presentation.ImageDisplay
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 import kotlinx.coroutines.launch
 import java.io.File

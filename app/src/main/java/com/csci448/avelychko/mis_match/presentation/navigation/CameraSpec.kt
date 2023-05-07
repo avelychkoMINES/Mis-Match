@@ -52,8 +52,6 @@ object CameraSpec: IScreenSpec {
         coroutineScope: CoroutineScope
     ) {
         val selectedCameraState = viewModel.selectedCameraState.collectAsState()
-        CameraView(viewModel, coroutineScope)
-
-
+        CameraView()
     }
 }

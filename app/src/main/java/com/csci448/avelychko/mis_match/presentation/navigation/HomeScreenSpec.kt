@@ -40,7 +40,8 @@ object HomeScreenSpec : IScreenSpec {
         }, onSavedOutfitsClick =
         {
             navController.navigate("saved outfits")
-        },
+        }
+            ,
             onClosetClick =
         {
             navController.navigate("closet")
