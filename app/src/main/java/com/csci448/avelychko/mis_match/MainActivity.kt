@@ -1,6 +1,5 @@
 package com.csci448.avelychko.mis_match
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -23,6 +21,7 @@ import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchNavHost
 import androidx.lifecycle.ViewModelProvider
 import com.csci448.avelychko.mis_match.presentation.navigation.MisMatchTopBar
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModelFactory
+import com.csci448.avelychko.mis_match.util.NotificationReceiver
 
 class MainActivity : ComponentActivity() {
     private lateinit var cameraUtility: CameraUtility
@@ -30,6 +29,10 @@ class MainActivity : ComponentActivity() {
     private lateinit var viewModel: PhotographViewModel
     private lateinit var notificationPermissionLauncher: ActivityResultLauncher<Array<String>>
     private val notificationReceiver = NotificationReceiver()
+
+    companion object {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +52,6 @@ class MainActivity : ComponentActivity() {
            }
            
         cameraUtility = CameraUtility(this@MainActivity)
-
 
         setContent {
             val navController = rememberNavController()

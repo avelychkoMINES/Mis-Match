@@ -1,9 +1,4 @@
-package com.csci448.avelychko.mis_match
-
-import android.app.Activity
-import androidx.activity.result.ActivityResultLauncher
-
-package com.csci448.geolocatr
+package com.csci448.avelychko.mis_match.util
 
 import android.Manifest
 import android.app.PendingIntent
@@ -22,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.startActivity
+import com.csci448.avelychko.mis_match.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,13 +27,9 @@ class NotificationReceiver : BroadcastReceiver() {
 
     companion object locAlarm{
         private const val ALARM_ACTION = "448_ALARM_ACTION"
-        private const val EXTRA_LATITUDE = "latitude"
-        private const val EXTRA_LONGITUDE = "longitude"
-        private fun createIntent(context: Context, location: Location?): Intent {
-            val intent = Intent(context, LocationAlarmReceiver::class.java).apply {
+        private fun createIntent(context: Context): Intent {
+            val intent = Intent(context, NotificationReceiver::class.java).apply {
                 action = ALARM_ACTION
-                putExtra(EXTRA_LATITUDE, location?.latitude ?: 0.0)
-                putExtra(EXTRA_LONGITUDE, location?.longitude ?: 0.0)
             }
             return intent
         }
@@ -46,7 +38,7 @@ class NotificationReceiver : BroadcastReceiver() {
     @SuppressLint("ServiceCast")
     private fun scheduleAlarm(activity: Activity) {
         val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = createIntent(activity, lastLocation)
+        val intent = createIntent(activity)
         val pendingIntent = PendingIntent.getBroadcast(
             activity,
             0,
@@ -85,9 +77,6 @@ class NotificationReceiver : BroadcastReceiver() {
         val channelDesc = "channel created to send alarm for geolocatr"
 
         if (intent.action == ALARM_ACTION) {
-            val lati = intent.getDoubleExtra(EXTRA_LATITUDE, 0.0)
-            val longi = intent.getDoubleExtra(EXTRA_LONGITUDE, 0.0)
-            Log.d(LOG_TAG, "received our intent with $lati / $longi")
 
             if (ActivityCompat
                     .checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
@@ -103,15 +92,11 @@ class NotificationReceiver : BroadcastReceiver() {
                         description = channelDesc
                     }
                 notificationManager.createNotificationChannel(channel)
-                val startingLocation = Location("").apply {
-                    latitude = lati
-                    longitude = longi
-                }
-                val deepLinkPendingIntent = MainActivity.createPendingIntent(context, startingLocation)
+
+                val deepLinkPendingIntent = MainActivity.createPendingIntent(context)
                 val notification = NotificationCompat.Builder(context, "channelId")
                     .setSmallIcon(android.R.drawable.ic_dialog_map)
-                    .setContentTitle("You are here!")
-                    .setContentText("\"You are at $lati / $longi")
+                    .setContentTitle("Time to create an outfit for the day!")
                     .setContentIntent(deepLinkPendingIntent)
                     .setAutoCancel(true)
                     .build()
@@ -119,10 +104,6 @@ class NotificationReceiver : BroadcastReceiver() {
 
             }
         }
-
-
-
-
     }
     fun checkPermissionAndScheduleAlarm(
         activity: Activity,
