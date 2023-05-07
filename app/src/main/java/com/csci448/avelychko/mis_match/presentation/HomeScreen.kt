@@ -23,7 +23,7 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewMode
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Unit,
+fun HomeScreen (onOutfitBuilderClick: () -> Unit,
                 onSavedOutfitsClick: () -> Unit,
                 onClosetClick: () -> Unit, onCameraClick: () -> Unit,
                 onSettingsClick: () -> Unit) {
@@ -52,7 +52,7 @@ fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Uni
                         modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
 
                     Text("Outfit Builder",
-                        fontSize = 28.sp,
+                        fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Light,
@@ -71,7 +71,7 @@ fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Uni
                     Icon(painter = painterResource(id = R.drawable.baseline_favorite_border_24), contentDescription = "Saved Outfits",
                         modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
                     Text("Saved Outfits",
-                        fontSize = 28.sp,
+                        fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Light,
@@ -90,7 +90,7 @@ fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Uni
                     Icon(painter = painterResource(id = R.drawable.clothes_hanger_icon_3), contentDescription = "View Your Closet",
                         modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
                     Text("View Your Closet",
-                        fontSize = 28.sp,
+                        fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Light,
@@ -109,16 +109,13 @@ fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Uni
                     Icon(painter = painterResource(id = R.drawable.clothes_hanger_icon_3), contentDescription = "View Your Closet",
                         modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
                     Text("Settings",
-                        fontSize = 28.sp,
+                        fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Light,
                         color = Color(red=226, green=114, blue=91))
                 }
-
-
-
-                }
+            }
             IconButton(onClick = { onCameraClick() }, modifier = Modifier.align(Alignment.BottomEnd)) {
                 Icon(painter = painterResource(id = R.drawable.baseline_camera_alt_24), contentDescription = "",
                 modifier = Modifier.width(100.dp).height(100.dp), tint = Color(red = 88, green = 76, blue = 109))
@@ -126,10 +123,4 @@ fun HomeScreen (viewModel : PhotographViewModel, onOutfitBuilderClick: () -> Uni
 
         }
     }
-}
-
-@Preview
-@Composable
-fun previewHomePage () : Unit {
-    //HomeScreen()
 }

@@ -31,6 +31,7 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
     val selectedCameraState = MutableStateFlow("")
 
     val builderEnabled = mutableStateOf(false)
+    val notificationsOn = mutableStateOf(false)
 
     private val mPhotographListStateFlow: MutableStateFlow<List<Photograph>> = MutableStateFlow(emptyList())
     val photographListStateFlow: StateFlow<List<Photograph>>
@@ -200,5 +201,9 @@ class PhotographViewModel(private val photographRepository: PhotographRepository
             indexShoe = photographRepository.getShoePhoto().size - 1
         }
         selectedShoeState.value = photographRepository.getShoePhoto()[indexShoe]
+    }
+
+    fun setNotification(bool: Boolean) {
+        notificationsOn.value = bool
     }
 }
