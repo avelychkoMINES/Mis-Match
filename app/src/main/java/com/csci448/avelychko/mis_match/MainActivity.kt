@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
             
          notificationPermissionLauncher =
            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-               locationAlarmReceiver.checkPermissionAndScheduleAlarm(this, alarmPermissionLauncher)
+               notificationReceiver.checkPermissionAndScheduleAlarm(this, notificationPermissionLauncher)
            }
            
         cameraUtility = CameraUtility(this@MainActivity)
