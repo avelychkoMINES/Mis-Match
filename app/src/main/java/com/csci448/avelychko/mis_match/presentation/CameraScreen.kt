@@ -55,10 +55,9 @@ fun CameraView() {
             Box(
                 modifier = Modifier
                     .weight(0.2f)
-
                     .background(Color.Black)
             ) {
-                Column(Modifier.padding(vertical = 30.dp)) {
+                Column(Modifier.padding(vertical = 5.dp)) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -96,7 +95,7 @@ fun CameraView() {
                                 painter = painterResource(id = R.drawable.baseline_circle_24),
                                 contentDescription = "",
                                 tint = Color.White,
-                                modifier = Modifier.width(100.dp).height(100.dp)
+                                modifier = Modifier.size(100.dp)
                             )
                         }
                     }
