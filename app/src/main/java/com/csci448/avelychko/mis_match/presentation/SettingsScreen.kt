@@ -17,7 +17,7 @@ import com.csci448.avelychko.mis_match.NotificationReceiver
 import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewModel
 
 @Composable
-fun SettingsScreen(viewModel: PhotographViewModel, onNotify: () -> Unit
+fun SettingsScreen(viewModel: PhotographViewModel, onNotify: () -> Unit, activity: Activity
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
 
@@ -53,7 +53,9 @@ fun SettingsScreen(viewModel: PhotographViewModel, onNotify: () -> Unit
                             }
                     })
                 }
-                Button(onClick = { onNotify() }) {
+                Button(onClick = {
+
+                }) {
                 }
             }
         }

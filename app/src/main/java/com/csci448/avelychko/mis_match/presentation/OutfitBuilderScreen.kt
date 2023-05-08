@@ -33,7 +33,7 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewMode
 fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
                       onRandomizeClick: () -> Unit) {
     val context = LocalContext.current
-    val mMediaPlayer = MediaPlayer.create(context, R.raw.audio)
+    val mMediaPlayer = MediaPlayer.create(context, R.raw.click)
 
     if (viewModel.getTopPhoto().isNotEmpty() && viewModel.getBottomPhoto().isNotEmpty()
         && viewModel.getShoePhoto().isNotEmpty()) {

@@ -41,6 +41,8 @@ object SettingsScreenSpec  : IScreenSpec {
         coroutineScope: CoroutineScope,
         onNotify: () -> Unit
     ) {
-        SettingsScreen(viewModel, onNotify)
+        SettingsScreen(viewModel,
+            onNotify, activity
+        )
     }
 }

@@ -17,9 +17,12 @@
         tools:targetApi="31">
         <receiver
             android:name=".NotificationReceiver"
-            android:exported="false"
+            android:exported="true"
             android:enabled="true"
-            android:permission="android.permission.POST_NOTIFICATIONS"/>
+            android:permission="android.permission.POST_NOTIFICATIONS">
+        <intent-filter>
+            <action android:name="448_ALARM_ACTION"/>
+        </intent-filter></receiver>
 
         <activity
             android:name=".MainActivity"
@@ -29,7 +32,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="448_ALARM_ACTION"/>
             </intent-filter>
         </activity>
     </application>

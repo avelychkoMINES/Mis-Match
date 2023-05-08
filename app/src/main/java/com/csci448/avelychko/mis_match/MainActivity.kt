@@ -5,6 +5,7 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
@@ -88,6 +89,8 @@ class MainActivity : ComponentActivity() {
             val coroutineScope = rememberCoroutineScope()
             val context = LocalContext.current
 
+            notificationReceiver.checkPermissionAndScheduleAlarm(this, notificationPermissionLauncher)
+
             MisMatchTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -107,7 +110,9 @@ class MainActivity : ComponentActivity() {
                         cameraUtility = cameraUtility,
                         activity = this@MainActivity,
                         permissionLauncher = permissionLauncher,
-                        onNotify = { notificationReceiver.checkPermissionAndScheduleAlarm(this, notificationPermissionLauncher) }
+                        onNotify = {
+                            Log.d("x", "on notify main")
+                            notificationReceiver.checkPermissionAndScheduleAlarm(this, notificationPermissionLauncher) }
                     )}
                 }
             }

@@ -4,6 +4,7 @@ import SimpleCameraPreview
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
@@ -36,7 +37,7 @@ fun CameraView() {
     val imageCapture = ImageCapture.Builder()
         .build()
     val context = LocalContext.current
-
+    val mMediaPlayer = MediaPlayer.create(context, R.raw.camera)
     var type = remember {
         ""
     }
@@ -89,6 +90,7 @@ fun CameraView() {
                     ) {
                         IconButton(onClick = {
                             takePhoto(imageCapture, context, type)
+                            mMediaPlayer.start()
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.baseline_circle_24),

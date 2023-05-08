@@ -70,8 +70,8 @@ class NotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d(LOG_TAG, "received alarm for action ${intent.action}")
-        val channelName = "locationalarmreceiver"
-        val channelDesc = "channel created to send alarm for geolocatr"
+        val channelName = "notificationreceiver"
+        val channelDesc = "channel created to send alarm for mismatch"
 
         if (intent.action == ALARM_ACTION) {
 
