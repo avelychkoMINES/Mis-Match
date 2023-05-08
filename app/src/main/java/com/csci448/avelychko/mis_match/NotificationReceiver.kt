@@ -50,12 +50,18 @@ class NotificationReceiver : BroadcastReceiver() {
             set(Calendar.HOUR_OF_DAY, 8)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
-        }
+            set(Calendar.MILLISECOND, 0)
+          }
 
         val alarmTimeInUTC = calendar.timeInMillis
 
-        val intervalMillis = AlarmManager.INTERVAL_DAY // Repeat interval: 1 day
+        if (alarmTimeInUTC <= System.currentTimeMillis()) {
+            // If the alarm time is in the past, add 1 day to set it for the next occurrence
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+            alarmTimeInUTC = calendar.timeInMillis
+        }
 
+        
         // Set the repeating alarm
         
         Log.d(LOG_TAG, "Setting alarm for ${
