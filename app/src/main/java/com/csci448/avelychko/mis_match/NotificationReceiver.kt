@@ -53,7 +53,7 @@ class NotificationReceiver : BroadcastReceiver() {
             set(Calendar.MILLISECOND, 0)
           }
 
-        val alarmTimeInUTC = calendar.timeInMillis
+        var alarmTimeInUTC = calendar.timeInMillis
 
         if (alarmTimeInUTC <= System.currentTimeMillis()) {
             // If the alarm time is in the past, add 1 day to set it for the next occurrence
@@ -74,7 +74,7 @@ class NotificationReceiver : BroadcastReceiver() {
                 alarmManager.setRepeating(
                     AlarmManager.RTC_WAKEUP,
                     alarmTimeInUTC,
-                    intervalMillis,
+                    AlarmManager.INTERVAL_DAY,
                     pendingIntent
                     )
             } else {
@@ -87,7 +87,7 @@ class NotificationReceiver : BroadcastReceiver() {
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 alarmTimeInUTC,
-                intervalMillis,
+                AlarmManager.INTERVAL_DAY,
                 pendingIntent
             )
         }

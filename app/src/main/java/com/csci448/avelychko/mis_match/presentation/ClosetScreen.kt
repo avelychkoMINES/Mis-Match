@@ -46,7 +46,7 @@ fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
                 .background(color = Color(224, 224, 224)).fillMaxSize(),
         ) {
             Column() {
-                Column(Modifier.padding(vertical = 40.dp)) {
+                Column(Modifier.padding(vertical = 5.dp)) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
                         .background(Color(red=241, green=241, blue=241)),
@@ -64,7 +64,7 @@ fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
                             })
                     } })
                 }
-                Column(Modifier.padding(vertical = 40.dp)) {
+                Column(Modifier.padding(vertical = 5.dp)) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
                         .background(Color(red=241, green=241, blue=241)),
@@ -81,7 +81,7 @@ fun ClosetView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit) {
                     } })
                 }
 
-                Column(Modifier.padding(vertical = 40.dp)) {
+                Column(Modifier.padding(vertical = 5.dp)) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
                         .background(Color(red=241, green=241, blue=241)),

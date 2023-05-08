@@ -237,17 +237,18 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
                         modifier = Modifier
                             .fillMaxWidth(0.5f)
                             .fillMaxHeight()
-                            .padding(horizontal = 20.dp, vertical = 30.dp)
+                            .padding(horizontal = 5.dp, vertical = 15.dp)
                             .clip(RoundedCornerShape(0.dp))
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_favorite_border_24),
                             contentDescription = "",
-                            tint = Color(red = 226, green = 114, blue = 91)
+                            tint = Color(red = 226, green = 114, blue = 91),
+                            modifier = Modifier.size(20.dp)
                         )
                         Text(
                             "Save Outfit",
-                            fontSize = 24.sp,
+                            fontSize = 15.sp,
                             textAlign = TextAlign.Center,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Light,
@@ -264,17 +265,18 @@ fun OutfitBuilderView(viewModel: PhotographViewModel, onLogoClicked: () -> Unit,
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight()
-                            .padding(horizontal = 20.dp, vertical = 30.dp)
+                            .padding(horizontal = 5.dp, vertical = 15.dp)
                             .clip(RoundedCornerShape(0.dp))
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_shuffle_24),
                             contentDescription = "Randomize Outfit",
-                            tint = Color(red = 226, green = 114, blue = 91)
+                            tint = Color(red = 226, green = 114, blue = 91),
+                            modifier = Modifier.size(20.dp)
                         )
                         Text(
                             "Randomize Outfit",
-                            fontSize = 24.sp,
+                            fontSize = 15.sp,
                             textAlign = TextAlign.Center,
                             fontFamily = FontFamily.SansSerif,
                             fontWeight = FontWeight.Light,
