@@ -65,7 +65,6 @@ class NotificationReceiver : BroadcastReceiver() {
                 alarmTimeInUTC,
                 pendingIntent)
         }
-
     }
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -93,8 +92,8 @@ class NotificationReceiver : BroadcastReceiver() {
                 val deepLinkPendingIntent = MainActivity.createPendingIntent(context)
                 val notification = NotificationCompat.Builder(context, "0")
                     .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
-                    .setContentTitle("Time to create an outfit for the day!")
-                    .setContentText("ggg")
+                    .setContentTitle("Mis-Match")
+                    .setContentText("Time to create an outfit for the day!")
                     .setContentIntent(deepLinkPendingIntent)
                     .setAutoCancel(true)
                     .build()

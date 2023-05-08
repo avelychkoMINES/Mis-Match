@@ -61,8 +61,7 @@ sealed interface IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope,
-        onNotify: () -> Unit
+        coroutineScope: CoroutineScope
     )
 
     @OptIn(ExperimentalMaterial3Api::class)

@@ -23,8 +23,7 @@ fun MisMatchNavHost(
     permissionLauncher: ActivityResultLauncher<Array<String>>,
     coroutineScope: CoroutineScope,
     context: Context,
-    modifier: Modifier,
-    onNotify: () -> Unit
+    modifier: Modifier
 ) {
     NavHost(
         modifier = modifier,
@@ -49,8 +48,7 @@ fun MisMatchNavHost(
                             coroutineScope = coroutineScope,
                             activity = activity,
                             cameraUtility = cameraUtility,
-                            permissionLauncher = permissionLauncher,
-                            onNotify = onNotify
+                            permissionLauncher = permissionLauncher
                         )
                     }
                 }

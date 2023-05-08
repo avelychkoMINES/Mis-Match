@@ -33,8 +33,7 @@ object HomeScreenSpec : IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope,
-        onNotify: () -> Unit
+        coroutineScope: CoroutineScope
     ) {
         HomeScreen(
             onOutfitBuilderClick = {
@@ -45,10 +44,7 @@ object HomeScreenSpec : IScreenSpec {
         }, onClosetClick =
         {
             navController.navigate("closet")
-        }, onSettingsClick =
-            {
-                navController.navigate("settings")
-            },
+        },
             onCameraClick = {
                 cameraUtility.checkPermissionAndGetCamera(activity, permissionLauncher)
                 navController.navigate("camera")

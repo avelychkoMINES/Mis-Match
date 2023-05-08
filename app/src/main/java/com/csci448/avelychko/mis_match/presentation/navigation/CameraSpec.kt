@@ -50,8 +50,7 @@ object CameraSpec: IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope,
-        onNotify: () -> Unit
+        coroutineScope: CoroutineScope
     ) {
         val selectedCameraState = viewModel.selectedCameraState.collectAsState()
         CameraView()

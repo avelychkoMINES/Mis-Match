@@ -34,8 +34,7 @@ object OutfitBuilderSpec: IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope,
-        onNotify: () -> Unit
+        coroutineScope: CoroutineScope
     ) {
         OutfitBuilderView(viewModel, onLogoClicked = { navController.navigate("home")},
         onRandomizeClick = {viewModel.selectedTopState.value = viewModel.getTopPhoto().random()

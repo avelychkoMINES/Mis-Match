@@ -34,8 +34,7 @@ object SavedOutfitsSpec: IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope,
-        onNotify: () -> Unit
+        coroutineScope: CoroutineScope
     ) {
         SavedOutfitsView(viewModel = viewModel)
     }

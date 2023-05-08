@@ -109,10 +109,7 @@ class MainActivity : ComponentActivity() {
                         coroutineScope = coroutineScope,
                         cameraUtility = cameraUtility,
                         activity = this@MainActivity,
-                        permissionLauncher = permissionLauncher,
-                        onNotify = {
-                            Log.d("x", "on notify main")
-                            notificationReceiver.checkPermissionAndScheduleAlarm(this, notificationPermissionLauncher) }
+                        permissionLauncher = permissionLauncher
                     )}
                 }
             }

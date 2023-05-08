@@ -32,8 +32,7 @@ object ClosetScreenSpec: IScreenSpec {
         permissionLauncher: ActivityResultLauncher<Array<String>>,
         navBackStackEntry: NavBackStackEntry,
         context: Context,
-        coroutineScope: CoroutineScope,
-        onNotify: () -> Unit
+        coroutineScope: CoroutineScope
     ) {
         ClosetView(viewModel) { navController.navigate("home") }
     }

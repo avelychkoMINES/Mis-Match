@@ -25,8 +25,7 @@ import com.csci448.avelychko.mis_match.presentation.viewmodel.PhotographViewMode
 @Composable
 fun HomeScreen (onOutfitBuilderClick: () -> Unit,
                 onSavedOutfitsClick: () -> Unit,
-                onClosetClick: () -> Unit, onCameraClick: () -> Unit,
-                onSettingsClick: () -> Unit) {
+                onClosetClick: () -> Unit, onCameraClick: () -> Unit) {
 
     Column() {
         Box(
@@ -90,25 +89,6 @@ fun HomeScreen (onOutfitBuilderClick: () -> Unit,
                     Icon(painter = painterResource(id = R.drawable.clothes_hanger_icon_3), contentDescription = "View Your Closet",
                         modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
                     Text("View Your Closet",
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight.Light,
-                        color = Color(red=226, green=114, blue=91))
-                }
-
-                ElevatedButton(
-                    onClick = { onSettingsClick() },
-                    shape = CutCornerShape(0),
-                    modifier = Modifier
-                        .fillMaxWidth(0.8f)
-                        .fillMaxHeight(0.35f)
-                        .padding(horizontal = 20.dp, vertical = 30.dp)
-                        .clip(RoundedCornerShape(0.dp))
-                ) {
-                    Icon(painter = painterResource(id = R.drawable.baseline_settings_24), contentDescription = "View Your Closet",
-                        modifier = Modifier.width(40.dp).height(40.dp).padding(5.dp), tint = Color(red=226, green=114, blue=91))
-                    Text("Settings",
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         fontFamily = FontFamily.SansSerif,
