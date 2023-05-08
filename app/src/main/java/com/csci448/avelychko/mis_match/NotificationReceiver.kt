@@ -42,8 +42,22 @@ class NotificationReceiver : BroadcastReceiver() {
             intent,
             PendingIntent.FLAG_IMMUTABLE
         )
-        val alarmDelayInSeconds = 5
-        val alarmTimeInUTC = System.currentTimeMillis() + alarmDelayInSeconds * 1_000L
+        //val alarmDelayInSeconds = 5
+        //val alarmTimeInUTC = System.currentTimeMillis() + alarmDelayInSeconds * 1_000L
+        
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 8)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }
+
+        val alarmTimeInUTC = calendar.timeInMillis
+
+        val intervalMillis = AlarmManager.INTERVAL_DAY // Repeat interval: 1 day
+
+        // Set the repeating alarm
+        
         Log.d(LOG_TAG, "Setting alarm for ${
             SimpleDateFormat("MM/dd/yyyy HH:mm:ss",
             Locale.US).format(Date(alarmTimeInUTC))}")
@@ -51,9 +65,12 @@ class NotificationReceiver : BroadcastReceiver() {
             Log.d(LOG_TAG, "running on Version S or newer, checking if can schedule exact alarms")
             if (alarmManager.canScheduleExactAlarms()) {
                 Log.d(LOG_TAG, "can schedule exact alarms: ${pendingIntent}")
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
                     alarmTimeInUTC,
-                    pendingIntent)
+                    intervalMillis,
+                    pendingIntent
+                    )
             } else {
                 Log.d(LOG_TAG, "can’t schedule exact alarms, launching intent to bring up settings")
                 val settingsIntent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
@@ -61,9 +78,12 @@ class NotificationReceiver : BroadcastReceiver() {
             }
         } else {
             Log.d(LOG_TAG, "running on Version R or older, can set alarm directly")
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
                 alarmTimeInUTC,
-                pendingIntent)
+                intervalMillis,
+                pendingIntent
+            )
         }
     }
 
