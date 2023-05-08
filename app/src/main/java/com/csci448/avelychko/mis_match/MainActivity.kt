@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
     companion object {
         private const val ROUTE_LOCATION = "outfit builder"
         private const val SCHEME = "https"
-        private const val HOST = "csci448.avelychko.mis_match"
+        private const val HOST = "com.csci448.avelychko.mis_match"
         private const val BASE_URI = "$SCHEME://$HOST"
 
         fun createPendingIntent(context: Context):
